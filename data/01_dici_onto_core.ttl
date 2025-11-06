@@ -1,0 +1,1452 @@
+@prefix dici_core: <urn:digicities:core#> .
+@prefix fibo-currency: <https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix qudt: <http://qudt.org/schema/qudt/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:digicities:core> a owl:Ontology .
+
+###  https://digicities.info/ontology#Author
+dici_core:Author a owl:AnnotationProperty .
+
+###  https://digicities.info/ontology#Collaborator
+dici_core:Collaborator a owl:AnnotationProperty .
+
+###  https://digicities.info/ontology#Institution
+dici_core:Institution a owl:AnnotationProperty .
+
+###  https://digicities.info/ontology#Synonymous
+dici_core:Synonymous a owl:AnnotationProperty .
+
+###  https://digicities.info/ontology#abbreviation
+dici_core:abbreviation a owl:AnnotationProperty .
+
+###  https://digicities.info/ontology#definition
+dici_core:definition a owl:AnnotationProperty .
+
+###  https://digicities.info/ontology#hasDefaultUnit
+dici_core:hasDefaultUnit a owl:AnnotationProperty ;
+                         rdfs:range qudt:Unit ;
+                         rdfs:domain dici_core:Attribute .
+
+###  https://digicities.info/ontology#hasQuantityKind
+dici_core:hasQuantityKind a owl:AnnotationProperty ;
+                          rdfs:range qudt:QuantityKind ;
+                          rdfs:domain dici_core:Attribute .
+
+###  http://www.w3.org/2001/XMLSchema#duration
+xsd:duration a rdfs:Datatype .
+
+###  http://qudt.org/schema/qudt/unit
+qudt:unit a owl:ObjectProperty ;
+          rdfs:subPropertyOf dici_core:hasUnit ;
+          rdfs:domain dici_core:Attribute ;
+          rdfs:range qudt:Unit .
+
+###  https://digicities.info/ontology#actuates
+dici_core:actuates a owl:ObjectProperty ;
+                   rdfs:subPropertyOf dici_core:controls ;
+                   rdfs:domain dici_core:Actuator ;
+                   rdfs:range dici_core:Component ;
+                   rdfs:comment "Actuator physically controls a component"@en ;
+                   rdfs:label "actuates" .
+
+###  https://digicities.info/ontology#assumptionObjectProperty
+dici_core:assumptionObjectProperty a owl:ObjectProperty .
+
+###  https://digicities.info/ontology#carriesEnergyCarrier
+dici_core:carriesEnergyCarrier a owl:ObjectProperty ;
+                               rdfs:subPropertyOf dici_core:carriesResource ;
+                               rdfs:domain dici_core:EnergyCarrierFlow ;
+                               rdfs:range dici_core:EnergyCarrier ;
+                               rdfs:label "carries energy carrier" .
+
+###  https://digicities.info/ontology#carriesResource
+dici_core:carriesResource a owl:ObjectProperty ;
+                          rdfs:domain dici_core:Flow ;
+                          rdfs:range dici_core:Resource ;
+                          rdfs:comment "The resource (energy carrier or material) being transported by the flow"@en ;
+                          rdfs:label "carries resource" .
+
+###  https://digicities.info/ontology#controls
+dici_core:controls a owl:ObjectProperty ;
+                   rdfs:subPropertyOf dici_core:linksComponent ;
+                   rdfs:domain dici_core:Device ;
+                   rdfs:range dici_core:Component ;
+                   rdfs:comment "Device controls another component"@en ;
+                   rdfs:label "controls" .
+
+###  https://digicities.info/ontology#currency
+dici_core:currency a owl:ObjectProperty ;
+                   rdfs:domain dici_core:CostAttribute ;
+                   rdfs:range fibo-currency:Currency ;
+                   rdfs:label "currency" .
+
+###  https://digicities.info/ontology#derivedFrom
+dici_core:derivedFrom a owl:ObjectProperty ;
+                      rdfs:domain dici_core:Scenario ;
+                      rdfs:range dici_core:Scenario .
+
+###  https://digicities.info/ontology#fedBy
+dici_core:fedBy a owl:ObjectProperty ;
+                rdfs:subPropertyOf dici_core:linksComponent ;
+                owl:inverseOf dici_core:feeds ;
+                rdfs:domain dici_core:Component ;
+                rdfs:range dici_core:Component .
+
+###  https://digicities.info/ontology#feeds
+dici_core:feeds a owl:ObjectProperty ;
+                rdfs:subPropertyOf dici_core:linksComponent .
+
+###  https://digicities.info/ontology#flowsThrough
+dici_core:flowsThrough a owl:ObjectProperty ;
+                       rdfs:subPropertyOf dici_core:linksComponent ;
+                       rdfs:domain dici_core:Flow ;
+                       rdfs:range dici_core:Location ;
+                       rdfs:comment "Locations traversed by a flow"@en ;
+                       rdfs:label "flows through" .
+
+###  https://digicities.info/ontology#hasActorAttribute
+dici_core:hasActorAttribute a owl:ObjectProperty ;
+                            rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                            rdfs:domain dici_core:Actor ;
+                            rdfs:range dici_core:ActorAttribute ;
+                            rdfs:label "has actor attribute" .
+
+###  https://digicities.info/ontology#hasActuatorAttribute
+dici_core:hasActuatorAttribute a owl:ObjectProperty ;
+                               rdfs:subPropertyOf dici_core:hasDeviceAttribute ;
+                               rdfs:domain dici_core:Actuator ;
+                               rdfs:range dici_core:ActuatorAttribute ;
+                               rdfs:label "has actuator attribute" .
+
+###  https://digicities.info/ontology#hasAttribute
+dici_core:hasAttribute a owl:ObjectProperty ;
+                       rdfs:domain dici_core:Component ;
+                       rdfs:range dici_core:Attribute ;
+                       rdfs:label "has Attribute" .
+
+###  https://digicities.info/ontology#hasColdAttribute
+dici_core:hasColdAttribute a owl:ObjectProperty ;
+                           rdfs:subPropertyOf dici_core:hasThermalEnergyAttribute ;
+                           rdfs:domain dici_core:ColdCarrier .
+
+###  https://digicities.info/ontology#hasComponentAttribute
+dici_core:hasComponentAttribute a owl:ObjectProperty ;
+                                rdfs:subPropertyOf dici_core:hasAttribute .
+
+###  https://digicities.info/ontology#hasControllerAttribute
+dici_core:hasControllerAttribute a owl:ObjectProperty ;
+                                 rdfs:subPropertyOf dici_core:hasDeviceAttribute ;
+                                 rdfs:domain dici_core:Controller ;
+                                 rdfs:range dici_core:ControllerAttribute ;
+                                 rdfs:label "has controller attribute" .
+
+###  https://digicities.info/ontology#hasConversionProcessAttribute
+dici_core:hasConversionProcessAttribute a owl:ObjectProperty ;
+                                        rdfs:subPropertyOf dici_core:hasProcessAttribute ;
+                                        rdfs:domain dici_core:ConversionProcess ;
+                                        rdfs:range dici_core:ConversionProcessAttribute ;
+                                        rdfs:label "has conversion process attribute" .
+
+###  https://digicities.info/ontology#hasConverterAttribute
+dici_core:hasConverterAttribute a owl:ObjectProperty ;
+                                rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                                rdfs:domain dici_core:Converter .
+
+###  https://digicities.info/ontology#hasDataPoints
+dici_core:hasDataPoints a owl:ObjectProperty ;
+                        rdfs:label "has data points" ;
+                        rdfs:domain dici_core:CurveAttribute ;
+                        rdfs:range rdf:JSON .
+
+###  https://digicities.info/ontology#hasDestination
+dici_core:hasDestination a owl:ObjectProperty ;
+                         rdfs:subPropertyOf dici_core:linksComponent ;
+                         owl:inverseOf dici_core:isDestinationOf ;
+                         rdfs:domain dici_core:Flow ;
+                         rdfs:range dici_core:Component ;
+                         rdfs:comment "The component to which the flow is directed"@en ;
+                         rdfs:label "has destination" .
+
+###  https://digicities.info/ontology#hasDeviceAttribute
+dici_core:hasDeviceAttribute a owl:ObjectProperty ;
+                             rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                             rdfs:domain dici_core:Device ;
+                             rdfs:range dici_core:DeviceAttribute ;
+                             rdfs:label "has device attribute" .
+
+###  https://digicities.info/ontology#hasElectricityAttribute
+dici_core:hasElectricityAttribute a owl:ObjectProperty ;
+                                  rdfs:subPropertyOf dici_core:hasEnergyCarrierAttribute ;
+                                  rdfs:domain dici_core:ElectricityCarrier .
+
+###  https://digicities.info/ontology#hasEnergyCarrierAttribute
+dici_core:hasEnergyCarrierAttribute a owl:ObjectProperty ;
+                                    rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                                    rdfs:domain dici_core:EnergyCarrier .
+
+###  https://digicities.info/ontology#hasEnergyCarrierEnergyCostAttribute
+dici_core:hasEnergyCarrierEnergyCostAttribute a owl:ObjectProperty ;
+                                              rdfs:subPropertyOf dici_core:hasEnergyCarrierAttribute ;
+                                              rdfs:range dici_core:EnergyCostAttribute .
+
+###  https://digicities.info/ontology#hasEnergyCarrierFlowAttribute
+dici_core:hasEnergyCarrierFlowAttribute a owl:ObjectProperty ;
+                                        rdfs:subPropertyOf dici_core:hasFlowAttribute ;
+                                        rdfs:domain dici_core:EnergyCarrierFlow ;
+                                        rdfs:range dici_core:EnergyCarrierFlowAttribute ;
+                                        rdfs:label "has energy carrier flow attribute" .
+
+###  https://digicities.info/ontology#hasEnergyConsumerAttribute
+dici_core:hasEnergyConsumerAttribute a owl:ObjectProperty ;
+                                     rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                                     rdfs:domain dici_core:EnergyConsumer .
+
+###  https://digicities.info/ontology#hasEnergyConverterAttribute
+dici_core:hasEnergyConverterAttribute a owl:ObjectProperty ;
+                                      rdfs:subPropertyOf dici_core:hasConverterAttribute ;
+                                      rdfs:domain dici_core:EnergyConverter .
+
+###  https://digicities.info/ontology#hasFlowAttribute
+dici_core:hasFlowAttribute a owl:ObjectProperty ;
+                           rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                           rdfs:domain dici_core:Flow ;
+                           rdfs:range dici_core:FlowAttribute ;
+                           rdfs:label "has flow attribute" .
+
+###  https://digicities.info/ontology#hasFuelAttribute
+dici_core:hasFuelAttribute a owl:ObjectProperty ;
+                           rdfs:subPropertyOf dici_core:hasEnergyCarrierAttribute ;
+                           rdfs:domain dici_core:FuelCarrier .
+
+###  https://digicities.info/ontology#hasFutureTimeSeries
+dici_core:hasFutureTimeSeries a owl:ObjectProperty ;
+                              rdfs:subPropertyOf dici_core:hasTimeSeries ;
+                              owl:inverseOf dici_core:isFutureTimeSeriesOf .
+
+###  https://digicities.info/ontology#hasGaseousFuelAttribute
+dici_core:hasGaseousFuelAttribute a owl:ObjectProperty ;
+                                  rdfs:subPropertyOf dici_core:hasFuelAttribute ;
+                                  rdfs:domain dici_core:GaseousFuelCarrier .
+
+###  https://digicities.info/ontology#hasHeatAttribute
+dici_core:hasHeatAttribute a owl:ObjectProperty ;
+                           rdfs:subPropertyOf dici_core:hasThermalEnergyAttribute ;
+                           rdfs:domain dici_core:HeatCarrier .
+
+###  https://digicities.info/ontology#hasHistoricTimeSeries
+dici_core:hasHistoricTimeSeries a owl:ObjectProperty ;
+                                rdfs:subPropertyOf dici_core:hasTimeSeries ;
+                                owl:inverseOf dici_core:isHistoricTimeSeriesOf .
+
+###  https://digicities.info/ontology#hasInputAttribute
+dici_core:hasInputAttribute a owl:ObjectProperty ;
+                            owl:inverseOf dici_core:isAttributeOf ;
+                            rdfs:domain dici_core:ServiceRequirement ;
+                            rdfs:range dici_core:Attribute ;
+                            rdfs:label "has input attribute" .
+
+###  https://digicities.info/ontology#hasInputEntity
+dici_core:hasInputEntity a owl:ObjectProperty ;
+                         owl:inverseOf dici_core:isEntityOf ;
+                         rdfs:domain dici_core:ComponentLink ,
+                                     dici_core:ServiceRequirement ;
+                         rdfs:range dici_core:Component ;
+                         rdfs:label "has input entity" .
+
+###  https://digicities.info/ontology#hasInputFlow
+dici_core:hasInputFlow a owl:ObjectProperty ;
+                       rdfs:subPropertyOf dici_core:linksComponent ;
+                       rdfs:domain dici_core:Component ;
+                       rdfs:range dici_core:Flow ;
+                       rdfs:comment "Links a component to its input flows"@en ;
+                       rdfs:label "has input flow" .
+
+###  https://digicities.info/ontology#hasJunctionAttribute
+dici_core:hasJunctionAttribute a owl:ObjectProperty ;
+                               rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                               rdfs:domain dici_core:Junction ;
+                               rdfs:range dici_core:JunctionAttribute ;
+                               rdfs:label "has junction attribute" .
+
+###  https://digicities.info/ontology#hasLiquidFuelAttribute
+dici_core:hasLiquidFuelAttribute a owl:ObjectProperty ;
+                                 rdfs:subPropertyOf dici_core:hasFuelAttribute ;
+                                 rdfs:domain dici_core:LiquidFuel .
+
+###  https://digicities.info/ontology#hasLiveTimeSeries
+dici_core:hasLiveTimeSeries a owl:ObjectProperty ;
+                            rdfs:subPropertyOf dici_core:hasTimeSeries ;
+                            owl:inverseOf dici_core:isLiveTimeSeriesOf .
+
+###  https://digicities.info/ontology#hasLocationAttribute
+dici_core:hasLocationAttribute a owl:ObjectProperty ;
+                               rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                               rdfs:domain dici_core:Location ;
+                               rdfs:range dici_core:LocationAttribute ;
+                               rdfs:label "has location attribute" .
+
+###  https://digicities.info/ontology#hasMaterialConverterAttribute
+dici_core:hasMaterialConverterAttribute a owl:ObjectProperty ;
+                                        rdfs:subPropertyOf dici_core:hasConverterAttribute ;
+                                        rdfs:domain dici_core:MaterialConverter .
+
+###  https://digicities.info/ontology#hasMaterialFlowAttribute
+dici_core:hasMaterialFlowAttribute a owl:ObjectProperty ;
+                                   rdfs:subPropertyOf dici_core:hasFlowAttribute ;
+                                   rdfs:domain dici_core:MaterialFlow ;
+                                   rdfs:range dici_core:MaterialFlowAttribute ;
+                                   rdfs:label "has material flow attribute" .
+
+###  https://digicities.info/ontology#hasMeterAttribute
+dici_core:hasMeterAttribute a owl:ObjectProperty ;
+                            rdfs:subPropertyOf dici_core:hasDeviceAttribute ;
+                            rdfs:domain dici_core:Meter ;
+                            rdfs:range dici_core:MeterAttribute ;
+                            rdfs:label "has meter attribute" .
+
+###  https://digicities.info/ontology#hasNetworkAttribute
+dici_core:hasNetworkAttribute a owl:ObjectProperty ;
+                              rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                              rdfs:domain dici_core:Network ;
+                              rdfs:range dici_core:NetworkAttribute ;
+                              rdfs:label "has network attribute" .
+
+###  https://digicities.info/ontology#hasNonRenewableAttribute
+dici_core:hasNonRenewableAttribute a owl:ObjectProperty ;
+                                   rdfs:subPropertyOf dici_core:hasResourceAttribute ;
+                                   rdfs:domain dici_core:NonRenewableResource .
+
+###  https://digicities.info/ontology#hasOutputFlow
+dici_core:hasOutputFlow a owl:ObjectProperty ;
+                        rdfs:subPropertyOf dici_core:linksComponent ;
+                        rdfs:domain dici_core:Component ;
+                        rdfs:range dici_core:Flow ;
+                        rdfs:comment "Links a component to its output flows"@en ;
+                        rdfs:label "has output flow" .
+
+###  https://digicities.info/ontology#hasPart
+dici_core:hasPart a owl:ObjectProperty ;
+                  rdfs:subPropertyOf dici_core:linksComponent ;
+                  owl:inverseOf dici_core:partOf .
+
+###  https://digicities.info/ontology#hasProcessAttribute
+dici_core:hasProcessAttribute a owl:ObjectProperty ;
+                              rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                              rdfs:domain dici_core:Process ;
+                              rdfs:range dici_core:ProcessAttribute ;
+                              rdfs:label "has process attribute" .
+
+###  https://digicities.info/ontology#hasRenewableAttribute
+dici_core:hasRenewableAttribute a owl:ObjectProperty ;
+                                rdfs:subPropertyOf dici_core:hasResourceAttribute ;
+                                rdfs:domain dici_core:RenewableResource .
+
+###  https://digicities.info/ontology#hasResourceAttribute
+dici_core:hasResourceAttribute a owl:ObjectProperty ;
+                               rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                               rdfs:domain dici_core:Resource .
+
+###  https://digicities.info/ontology#hasSensorAttribute
+dici_core:hasSensorAttribute a owl:ObjectProperty ;
+                             rdfs:subPropertyOf dici_core:hasDeviceAttribute ;
+                             rdfs:domain dici_core:Sensor ;
+                             rdfs:range dici_core:SensorAttribute ;
+                             rdfs:label "has sensor attribute" .
+
+###  https://digicities.info/ontology#hasSolarAttribute
+dici_core:hasSolarAttribute a owl:ObjectProperty ;
+                            rdfs:subPropertyOf dici_core:hasRenewableAttribute ;
+                            rdfs:domain dici_core:SolarResource .
+
+###  https://digicities.info/ontology#hasSolidFuelAttribute
+dici_core:hasSolidFuelAttribute a owl:ObjectProperty ;
+                                rdfs:subPropertyOf dici_core:hasFuelAttribute ;
+                                rdfs:domain dici_core:SolidFuel .
+
+###  https://digicities.info/ontology#hasSource
+dici_core:hasSource a owl:ObjectProperty ;
+                    rdfs:subPropertyOf dici_core:linksComponent ;
+                    owl:inverseOf dici_core:isSourceOf ;
+                    rdfs:domain dici_core:Flow ;
+                    rdfs:range dici_core:Component ;
+                    rdfs:comment "The component from which the flow originates"@en ;
+                    rdfs:label "has source" .
+
+###  https://digicities.info/ontology#hasStorageAttribute
+dici_core:hasStorageAttribute a owl:ObjectProperty ;
+                              rdfs:subPropertyOf dici_core:hasComponentAttribute ;
+                              rdfs:domain dici_core:Storage ;
+                              rdfs:range dici_core:StorageAttribute ;
+                              rdfs:label "has storage attribute" .
+
+###  https://digicities.info/ontology#hasSwitchAttribute
+dici_core:hasSwitchAttribute a owl:ObjectProperty ;
+                             rdfs:subPropertyOf dici_core:hasDeviceAttribute ;
+                             rdfs:domain dici_core:Switch ;
+                             rdfs:range dici_core:SwitchAttribute ;
+                             rdfs:label "has switch attribute" .
+
+###  https://digicities.info/ontology#hasThermalEnergyAttribute
+dici_core:hasThermalEnergyAttribute a owl:ObjectProperty ;
+                                    rdfs:subPropertyOf dici_core:hasEnergyCarrierAttribute ;
+                                    rdfs:domain dici_core:ThermalEnergyCarrier .
+
+###  https://digicities.info/ontology#hasTimeSeries
+dici_core:hasTimeSeries a owl:ObjectProperty ;
+                        owl:inverseOf dici_core:isTimeSeriesOf ;
+                        rdfs:domain dici_core:DynamicAttribute ;
+                        rdfs:range dici_core:TimeSeries ;
+                        rdfs:comment "Links a dynamic attribute to its associated time series data"@en ;
+                        rdfs:label "has time series" .
+
+###  https://digicities.info/ontology#hasTransportProcessAttribute
+dici_core:hasTransportProcessAttribute a owl:ObjectProperty ;
+                                       rdfs:subPropertyOf dici_core:hasProcessAttribute ;
+                                       rdfs:domain dici_core:TransportProcess ;
+                                       rdfs:range dici_core:TransportProcessAttribute ;
+                                       rdfs:label "has transport process attribute" .
+
+###  https://digicities.info/ontology#hasUnit
+dici_core:hasUnit a owl:ObjectProperty ;
+                  rdfs:domain dici_core:Attribute ;
+                  rdfs:range qudt:Unit ;
+                  rdfs:label "has unit" .
+
+###  https://digicities.info/ontology#hasWindAttribute
+dici_core:hasWindAttribute a owl:ObjectProperty ;
+                           rdfs:subPropertyOf dici_core:hasRenewableAttribute ;
+                           rdfs:domain dici_core:Wind .
+
+###  https://digicities.info/ontology#isAttributeOf
+dici_core:isAttributeOf a owl:ObjectProperty ;
+                        rdfs:domain dici_core:Attribute ;
+                        rdfs:range dici_core:ServiceRequirement ;
+                        rdfs:label "is attribute of" .
+
+###  https://digicities.info/ontology#isDestinationOf
+dici_core:isDestinationOf a owl:ObjectProperty ;
+                          rdfs:subPropertyOf dici_core:linksComponent ;
+                          rdfs:domain dici_core:Component ;
+                          rdfs:range dici_core:Flow ;
+                          rdfs:label "is destination of" .
+
+###  https://digicities.info/ontology#isEntityOf
+dici_core:isEntityOf a owl:ObjectProperty ;
+                     rdfs:domain dici_core:Component ;
+                     rdfs:range dici_core:ServiceRequirement ;
+                     rdfs:label "is entity of" .
+
+###  https://digicities.info/ontology#isFutureTimeSeriesOf
+dici_core:isFutureTimeSeriesOf a owl:ObjectProperty ;
+                               rdfs:subPropertyOf dici_core:isTimeSeriesOf ;
+                               rdfs:domain dici_core:FutureTimeSeries ;
+                               rdfs:range dici_core:DynamicAttribute .
+
+###  https://digicities.info/ontology#isHistoricTimeSeriesOf
+dici_core:isHistoricTimeSeriesOf a owl:ObjectProperty ;
+                                 rdfs:subPropertyOf dici_core:isTimeSeriesOf ;
+                                 rdfs:domain dici_core:HistoricTimeSeries ;
+                                 rdfs:range dici_core:DynamicAttribute .
+
+###  https://digicities.info/ontology#isLiveTimeSeriesOf
+dici_core:isLiveTimeSeriesOf a owl:ObjectProperty ;
+                             rdfs:subPropertyOf dici_core:isTimeSeriesOf ;
+                             rdfs:domain dici_core:LiveTimeSeries ;
+                             rdfs:range dici_core:DynamicAttribute .
+
+###  https://digicities.info/ontology#isRequiredBy
+dici_core:isRequiredBy a owl:ObjectProperty ;
+                       owl:inverseOf dici_core:requires ;
+                       rdfs:domain dici_core:ServiceRequirement ;
+                       rdfs:range dici_core:Service ;
+                       rdfs:label "is required by" .
+
+###  https://digicities.info/ontology#isSourceOf
+dici_core:isSourceOf a owl:ObjectProperty ;
+                     rdfs:subPropertyOf dici_core:linksComponent ;
+                     rdfs:domain dici_core:Component ;
+                     rdfs:range dici_core:Flow ;
+                     rdfs:label "is source of" .
+
+###  https://digicities.info/ontology#isTimeSeriesOf
+dici_core:isTimeSeriesOf a owl:ObjectProperty ;
+                         rdfs:domain dici_core:TimeSeries ;
+                         rdfs:range dici_core:DynamicAttribute ;
+                         rdfs:comment "Links a time series to the dynamic attribute it represents"@en ;
+                         rdfs:label "is time series of" .
+
+###  https://digicities.info/ontology#linksComponent
+dici_core:linksComponent a owl:ObjectProperty ,
+                                  owl:SymmetricProperty ;
+                         rdfs:domain dici_core:Component ;
+                         rdfs:range dici_core:Component .
+
+###  https://digicities.info/ontology#linksInputEntityTo
+dici_core:linksInputEntityTo a owl:ObjectProperty ;
+                             rdfs:domain dici_core:ComponentLink ;
+                             rdfs:range dici_core:Component .
+
+###  https://digicities.info/ontology#locatedAt
+dici_core:locatedAt a owl:ObjectProperty ;
+                    rdfs:subPropertyOf dici_core:linksComponent ;
+                    rdfs:domain dici_core:Component ;
+                    rdfs:range dici_core:Location ;
+                    rdfs:comment "Physical location of a component"@en ;
+                    rdfs:label "located at" .
+
+###  https://digicities.info/ontology#locatedIn
+dici_core:locatedIn a owl:ObjectProperty ;
+                    rdfs:subPropertyOf dici_core:linksComponent ;
+                    owl:inverseOf dici_core:locationOf ;
+                    rdfs:domain dici_core:Location .
+
+###  https://digicities.info/ontology#locationOf
+dici_core:locationOf a owl:ObjectProperty ;
+                     rdfs:subPropertyOf dici_core:linksComponent .
+
+###  https://digicities.info/ontology#measures
+dici_core:measures a owl:ObjectProperty ;
+                   rdfs:domain dici_core:Device ;
+                   rdfs:range dici_core:Attribute ;
+                   rdfs:comment "Device measures a specific attribute"@en ;
+                   rdfs:label "measures" .
+
+###  https://digicities.info/ontology#monitors
+dici_core:monitors a owl:ObjectProperty ;
+                   rdfs:subPropertyOf dici_core:linksComponent ;
+                   rdfs:domain dici_core:Device ;
+                   rdfs:range dici_core:Component ;
+                   rdfs:comment "Device monitors another component"@en ;
+                   rdfs:label "monitors" .
+
+###  https://digicities.info/ontology#operates
+dici_core:operates a owl:ObjectProperty ;
+                   rdfs:subPropertyOf dici_core:linksComponent ;
+                   rdfs:domain dici_core:Actor ;
+                   rdfs:range dici_core:Component ;
+                   rdfs:comment "Operational control relationship"@en ;
+                   rdfs:label "operates" .
+
+###  https://digicities.info/ontology#owns
+dici_core:owns a owl:ObjectProperty ;
+               rdfs:subPropertyOf dici_core:linksComponent ;
+               rdfs:domain dici_core:Actor ;
+               rdfs:range dici_core:Component ;
+               rdfs:comment "Ownership relationship between actors and components"@en ;
+               rdfs:label "owns" .
+
+###  https://digicities.info/ontology#partOf
+dici_core:partOf a owl:ObjectProperty ;
+                 rdfs:subPropertyOf dici_core:linksComponent .
+
+###  https://digicities.info/ontology#realTimeSource
+dici_core:realTimeSource a owl:ObjectProperty ;
+                         rdfs:domain dici_core:DynamicAttribute ;
+                         rdfs:comment "Reference to a real-time data source for live dynamic attributes"@en ;
+                         rdfs:label "real-time source" .
+
+###  https://digicities.info/ontology#requires
+dici_core:requires a owl:ObjectProperty ;
+                   rdfs:domain dici_core:Service ;
+                   rdfs:range dici_core:ServiceRequirement ;
+                   rdfs:label "requires" .
+
+###  https://digicities.info/ontology#targetAttribute
+dici_core:targetAttribute a owl:ObjectProperty ;
+                          rdfs:subPropertyOf dici_core:assumptionObjectProperty ;
+                          rdfs:domain dici_core:Assumption ;
+                          rdfs:range dici_core:Attribute .
+
+###  https://digicities.info/ontology#targetComponent
+dici_core:targetComponent a owl:ObjectProperty ;
+                          rdfs:subPropertyOf dici_core:assumptionObjectProperty ;
+                          rdfs:domain dici_core:Assumption ;
+                          rdfs:range dici_core:Component .
+
+###  https://digicities.info/ontology#usedInScenario
+dici_core:usedInScenario a owl:ObjectProperty ;
+                         rdfs:domain dici_core:Attribute ,
+                                     dici_core:Component ,
+                                     dici_core:ComponentLink ;
+                         rdfs:range dici_core:Scenario .
+
+###  https://digicities.info/ontology#xAttribute
+dici_core:xAttribute a owl:ObjectProperty ;
+                     rdfs:domain dici_core:CurveAttribute ;
+                     rdfs:range qudt:QuantityKind ;
+                     rdfs:label "x attribute" .
+
+###  https://digicities.info/ontology#xUnit
+dici_core:xUnit a owl:ObjectProperty ;
+                rdfs:subPropertyOf dici_core:hasUnit ;
+                rdfs:domain dici_core:CurveAttribute ;
+                rdfs:range qudt:Unit ;
+                rdfs:label "x unit" .
+
+###  https://digicities.info/ontology#yAttribute
+dici_core:yAttribute a owl:ObjectProperty ;
+                     rdfs:domain dici_core:CurveAttribute ;
+                     rdfs:range qudt:QuantityKind ;
+                     rdfs:label "y attribute" .
+
+###  https://digicities.info/ontology#yUnit
+dici_core:yUnit a owl:ObjectProperty ;
+                rdfs:subPropertyOf dici_core:hasUnit ;
+                rdfs:domain dici_core:CurveAttribute ;
+                rdfs:range qudt:Unit ;
+                rdfs:label "y unit" .
+
+###  http://qudt.org/schema/qudt/numericValue
+qudt:numericValue a owl:DatatypeProperty .
+
+###  http://qudt.org/schema/qudt/value
+qudt:value a owl:DatatypeProperty ;
+           rdfs:subPropertyOf dici_core:hasAttributeValue ;
+           rdfs:domain dici_core:Attribute .
+
+###  https://digicities.info/ontology#assumptionDataProperty
+dici_core:assumptionDataProperty a owl:DatatypeProperty .
+
+###  https://digicities.info/ontology#assumptionTimesteps
+dici_core:assumptionTimesteps a owl:DatatypeProperty ;
+                              rdfs:subPropertyOf dici_core:assumptionDataProperty ;
+                              rdfs:domain dici_core:AssumptionSeries .
+
+###  https://digicities.info/ontology#endTime
+dici_core:endTime a owl:DatatypeProperty ;
+                  rdfs:domain dici_core:TimeSeries ;
+                  rdfs:range xsd:dateTime ;
+                  rdfs:comment "The ending timestamp of the time series data"@en ;
+                  rdfs:label "end time" .
+
+###  https://digicities.info/ontology#hasAttributeValue
+dici_core:hasAttributeValue a owl:DatatypeProperty ;
+                            rdfs:domain dici_core:Attribute ;
+                            rdfs:label "has attribute value" .
+
+###  https://digicities.info/ontology#hasDataPath
+dici_core:hasDataPath a owl:DatatypeProperty ;
+                      rdfs:subPropertyOf dici_core:hasAttributeValue ;
+                      rdfs:domain dici_core:CurveAttribute ;
+                      rdfs:range xsd:string ;
+                      rdfs:label "has data path" .
+
+###  https://digicities.info/ontology#hasDataPoints
+dici_core:hasDataPoints a owl:DatatypeProperty ;
+                        rdfs:subPropertyOf dici_core:hasAttributeValue .
+
+###  https://digicities.info/ontology#hasFileName
+dici_core:hasFileName a owl:DatatypeProperty ;
+                      rdfs:domain dici_core:TimeSeries ;
+                      rdfs:range xsd:string ;
+                      rdfs:comment "The filename of the time series data file"@en ;
+                      rdfs:label "has file name" .
+
+###  https://digicities.info/ontology#modifier
+dici_core:modifier a owl:DatatypeProperty ;
+                   rdfs:subPropertyOf dici_core:assumptionDataProperty .
+
+###  https://digicities.info/ontology#modifierValue
+dici_core:modifierValue a owl:DatatypeProperty ;
+                        rdfs:subPropertyOf dici_core:assumptionDataProperty .
+
+###  https://digicities.info/ontology#populationInfluenced
+dici_core:populationInfluenced a owl:DatatypeProperty ;
+                               rdfs:subPropertyOf dici_core:assumptionDataProperty .
+
+###  https://digicities.info/ontology#startTime
+dici_core:startTime a owl:DatatypeProperty ;
+                    rdfs:domain dici_core:TimeSeries ;
+                    rdfs:range xsd:dateTime ;
+                    rdfs:comment "The starting timestamp of the time series data"@en ;
+                    rdfs:label "start time" .
+
+###  https://digicities.info/ontology#storedAt
+dici_core:storedAt a owl:DatatypeProperty ;
+                   rdfs:domain dici_core:TimeSeries ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "The location or path where the time series data is stored"@en ;
+                   rdfs:label "stored at" .
+
+###  https://digicities.info/ontology#temporalResolution
+dici_core:temporalResolution a owl:DatatypeProperty ;
+                             rdfs:domain dici_core:TimeSeries ;
+                             rdfs:range xsd:duration ;
+                             rdfs:comment "The time interval between data points in the time series (e.g., PT1H for hourly, PT15M for 15-minute intervals)"@en ;
+                             rdfs:label "temporal resolution" .
+
+###  https://digicities.info/ontology#timeSeriesType
+dici_core:timeSeriesType a owl:DatatypeProperty ;
+                         rdfs:domain dici_core:TimeSeries ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "The type of time series: 'Historic', 'Live', or 'Future'"@en ;
+                         rdfs:label "time series type" .
+
+###  http://qudt.org/schema/qudt/QuantityKind
+qudt:QuantityKind a owl:Class .
+
+###  http://qudt.org/schema/qudt/Unit
+qudt:Unit a owl:Class .
+
+###  http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON
+rdf:JSON a owl:Class .
+
+###  https://digicities.info/ontology#Actor
+dici_core:Actor a owl:Class ;
+                rdfs:subClassOf dici_core:Component ;
+                rdfs:comment "Human or organizational agent that owns, operates, or regulates components"@en ;
+                rdfs:label "Actor" ;
+                dici_core:definition "Actors represent stakeholders in the energy system including operators, regulators, consumers, and policy makers"@en .
+
+###  https://digicities.info/ontology#ActorAttribute
+dici_core:ActorAttribute a owl:Class ;
+                         rdfs:subClassOf dici_core:ComponentAttribute ;
+                         rdfs:label "Actor Attribute" .
+
+###  https://digicities.info/ontology#Actuator
+dici_core:Actuator a owl:Class ;
+                   rdfs:subClassOf dici_core:Device ;
+                   rdfs:comment "Device that converts control signals into physical action"@en ;
+                   rdfs:label "Actuator" ;
+                   dici_core:definition "Actuators are devices that produce motion or control mechanisms based on input signals"@en .
+
+###  https://digicities.info/ontology#ActuatorAttribute
+dici_core:ActuatorAttribute a owl:Class ;
+                            rdfs:subClassOf dici_core:DeviceAttribute ;
+                            rdfs:label "Actuator Attribute" .
+
+###  https://digicities.info/ontology#ActuatorPosition
+dici_core:ActuatorPosition a owl:Class ;
+                           rdfs:subClassOf dici_core:ActuatorAttribute ,
+                                           dici_core:DynamicAttribute ;
+                           rdfs:comment "Current position or state of an actuator"@en ;
+                           rdfs:label "Actuator Position" ;
+                           dici_core:hasDefaultUnit unit:PERCENT .
+
+###  https://digicities.info/ontology#Assumption
+dici_core:Assumption a owl:Class .
+
+###  https://digicities.info/ontology#AssumptionSeries
+dici_core:AssumptionSeries a owl:Class ;
+                           rdfs:subClassOf dici_core:Assumption .
+
+###  https://digicities.info/ontology#AssumptionSingle
+dici_core:AssumptionSingle a owl:Class ;
+                           rdfs:subClassOf dici_core:Assumption .
+
+###  https://digicities.info/ontology#Attribute
+dici_core:Attribute a owl:Class ;
+                    rdfs:subClassOf owl:Thing ;
+                    rdfs:label "Attribute" .
+
+###  https://digicities.info/ontology#CircuitBreaker
+dici_core:CircuitBreaker a owl:Class ;
+                         rdfs:subClassOf dici_core:Switch ;
+                         rdfs:comment "Switch that automatically interrupts electrical flow for safety"@en ;
+                         rdfs:label "Circuit Breaker" .
+
+###  https://digicities.info/ontology#ColdCarrier
+dici_core:ColdCarrier a owl:Class ;
+                      rdfs:subClassOf dici_core:ThermalEnergyCarrier ;
+                      rdfs:label "Cold Carrier" .
+
+###  https://digicities.info/ontology#ColdCarrierAttribute
+dici_core:ColdCarrierAttribute a owl:Class ;
+                               rdfs:subClassOf dici_core:ThermalEnergyCarrierAttribute .
+
+###  https://digicities.info/ontology#Component
+dici_core:Component a owl:Class .
+
+###  https://digicities.info/ontology#ComponentAttribute
+dici_core:ComponentAttribute a owl:Class ;
+                             rdfs:subClassOf dici_core:Attribute ;
+                             rdfs:label "Component Attribute" .
+
+###  https://digicities.info/ontology#ComponentAttributeRequirement
+dici_core:ComponentAttributeRequirement a owl:Class ;
+                                        rdfs:subClassOf dici_core:ServiceRequirement ;
+                                        rdfs:label "Component-Attribute Requirement" .
+
+###  https://digicities.info/ontology#ComponentComponentRequirement
+dici_core:ComponentComponentRequirement a owl:Class ;
+                                        rdfs:subClassOf dici_core:ServiceRequirement ;
+                                        rdfs:label "Component-Component Requirement" .
+
+###  https://digicities.info/ontology#ComponentLink
+dici_core:ComponentLink a owl:Class .
+
+###  https://digicities.info/ontology#Controller
+dici_core:Controller a owl:Class ;
+                     rdfs:subClassOf dici_core:Device ;
+                     rdfs:comment "Device that manages and coordinates other devices or processes"@en ;
+                     rdfs:label "Controller" ;
+                     dici_core:definition "Controllers implement control logic and coordinate the operation of other system components"@en .
+
+###  https://digicities.info/ontology#ControllerAttribute
+dici_core:ControllerAttribute a owl:Class ;
+                              rdfs:subClassOf dici_core:DeviceAttribute ;
+                              rdfs:label "Controller Attribute" .
+
+###  https://digicities.info/ontology#ConversionProcess
+dici_core:ConversionProcess a owl:Class ;
+                            rdfs:subClassOf dici_core:Process ;
+                            rdfs:comment "Process that converts one form of energy to another"@en ;
+                            rdfs:label "Conversion Process" .
+
+###  https://digicities.info/ontology#ConversionProcessAttribute
+dici_core:ConversionProcessAttribute a owl:Class ;
+                                     rdfs:subClassOf dici_core:ProcessAttribute ;
+                                     rdfs:label "Conversion Process Attribute" .
+
+###  https://digicities.info/ontology#Converter
+dici_core:Converter a owl:Class ;
+                    rdfs:subClassOf dici_core:Component ;
+                    rdfs:label "Converter" .
+
+###  https://digicities.info/ontology#ConverterAttribute
+dici_core:ConverterAttribute a owl:Class ;
+                             rdfs:subClassOf dici_core:ComponentAttribute ;
+                             rdfs:label "Converter Attribute" .
+
+###  https://digicities.info/ontology#CostAttribute
+dici_core:CostAttribute a owl:Class ;
+                        rdfs:subClassOf dici_core:Attribute ;
+                        rdfs:label "Cost Attribute" ;
+                        dici_core:hasDefaultUnit unit:ONE .
+
+###  https://digicities.info/ontology#CurveAttribute
+dici_core:CurveAttribute a owl:Class ;
+                         rdfs:subClassOf dici_core:Attribute ,
+                                         [ a owl:Restriction ;
+                                           owl:onProperty dici_core:xAttribute ;
+                                           owl:someValuesFrom qudt:QuantityKind
+                                         ] ,
+                                         [ a owl:Restriction ;
+                                           owl:onProperty dici_core:xUnit ;
+                                           owl:someValuesFrom qudt:Unit
+                                         ] ,
+                                         [ a owl:Restriction ;
+                                           owl:onProperty dici_core:yAttribute ;
+                                           owl:someValuesFrom qudt:QuantityKind
+                                         ] ,
+                                         [ a owl:Restriction ;
+                                           owl:onProperty dici_core:yUnit ;
+                                           owl:someValuesFrom qudt:Unit
+                                         ] ,
+                                         [ a owl:Restriction ;
+                                           owl:onProperty dici_core:hasAttributeValue ;
+                                           owl:someValuesFrom rdfs:Literal
+                                         ] ;
+                         rdfs:label "Curve Attribute" ;
+                         dici_core:definition "An attribute represented by a set of x,y coordinate pairs forming a curve"@en .
+
+###  https://digicities.info/ontology#Damper
+dici_core:Damper a owl:Class ;
+                 rdfs:subClassOf dici_core:Actuator ;
+                 rdfs:comment "Actuator that controls air flow"@en ;
+                 rdfs:label "Damper" .
+
+###  https://digicities.info/ontology#Device
+dici_core:Device a owl:Class ;
+                 rdfs:subClassOf dici_core:Component ;
+                 rdfs:comment "Physical or virtual devices that monitor, control, or measure components in the energy system"@en ;
+                 rdfs:label "Device" ;
+                 dici_core:definition "Devices are components that provide sensing, actuation, measurement, or control capabilities within the energy system"@en .
+
+###  https://digicities.info/ontology#DeviceAttribute
+dici_core:DeviceAttribute a owl:Class ;
+                          rdfs:subClassOf dici_core:ComponentAttribute ;
+                          rdfs:label "Device Attribute" .
+
+###  https://digicities.info/ontology#DynamicAttribute
+dici_core:DynamicAttribute a owl:Class ;
+                           rdfs:subClassOf dici_core:Attribute ;
+                           rdfs:label "Dynamic Attribute" .
+
+###  https://digicities.info/ontology#Efficiency
+dici_core:Efficiency a owl:Class ;
+                     rdfs:subClassOf dici_core:ConversionProcessAttribute ,
+                                     dici_core:StaticAttribute ;
+                     rdfs:comment "Conversion efficiency of a process"@en ;
+                     rdfs:label "Efficiency" ;
+                     dici_core:hasDefaultUnit unit:PERCENT .
+
+###  https://digicities.info/ontology#ElectricityCarrier
+dici_core:ElectricityCarrier a owl:Class ;
+                             rdfs:subClassOf dici_core:EnergyCarrier ;
+                             rdfs:label "Electricity Carrier" .
+
+###  https://digicities.info/ontology#ElectricityCarrierAttribute
+dici_core:ElectricityCarrierAttribute a owl:Class ;
+                                      rdfs:subClassOf dici_core:EnergyCarrierAttribute .
+
+###  https://digicities.info/ontology#ElectricityDemandProfile
+dici_core:ElectricityDemandProfile a owl:Class ;
+                                   rdfs:subClassOf dici_core:DynamicAttribute ;
+                                   rdfs:comment "A dynamic attribute representing the electricity demand over time"@en ;
+                                   rdfs:label "Electricity Demand Profile" ;
+                                   dici_core:hasDefaultUnit unit:KiloW ;
+                                   dici_core:hasQuantityKind qudt:Power .
+
+###  https://digicities.info/ontology#ElectricityFlow
+dici_core:ElectricityFlow a owl:Class ;
+                          rdfs:subClassOf dici_core:EnergyCarrierFlow ;
+                          rdfs:label "Electricity Flow" ;
+                          dici_core:hasDefaultUnit unit:KiloW .
+
+###  https://digicities.info/ontology#ElectricityMeter
+dici_core:ElectricityMeter a owl:Class ;
+                           rdfs:subClassOf dici_core:Meter ;
+                           rdfs:label "Electricity Meter" ;
+                           dici_core:hasDefaultUnit unit:KiloW-HR .
+
+###  https://digicities.info/ontology#EnergyCarrier
+dici_core:EnergyCarrier a owl:Class ;
+                        rdfs:subClassOf dici_core:Component ;
+                        rdfs:label "Energy Carrier" .
+
+###  https://digicities.info/ontology#EnergyCarrierAttribute
+dici_core:EnergyCarrierAttribute a owl:Class ;
+                                 rdfs:subClassOf dici_core:ComponentAttribute .
+
+###  https://digicities.info/ontology#EnergyCarrierFlow
+dici_core:EnergyCarrierFlow a owl:Class ;
+                            rdfs:subClassOf dici_core:Flow ;
+                            rdfs:comment "Flow of energy carriers between components"@en ;
+                            rdfs:label "Energy Carrier Flow" .
+
+###  https://digicities.info/ontology#EnergyCarrierFlowAttribute
+dici_core:EnergyCarrierFlowAttribute a owl:Class ;
+                                     rdfs:subClassOf dici_core:FlowAttribute ;
+                                     rdfs:label "Energy Carrier Flow Attribute" .
+
+###  https://digicities.info/ontology#EnergyConsumer
+dici_core:EnergyConsumer a owl:Class ;
+                         rdfs:subClassOf dici_core:Component ;
+                         rdfs:label "Energy Consumer" .
+
+###  https://digicities.info/ontology#EnergyConsumerAttribute
+dici_core:EnergyConsumerAttribute a owl:Class ;
+                                  rdfs:subClassOf dici_core:ComponentAttribute .
+
+###  https://digicities.info/ontology#EnergyConverter
+dici_core:EnergyConverter a owl:Class ;
+                          rdfs:subClassOf dici_core:Converter ;
+                          rdfs:label "Energy Converter" .
+
+###  https://digicities.info/ontology#EnergyConverterAttribute
+dici_core:EnergyConverterAttribute a owl:Class ;
+                                   rdfs:subClassOf dici_core:ConverterAttribute .
+
+###  https://digicities.info/ontology#EnergyCostAttribute
+dici_core:EnergyCostAttribute a owl:Class ;
+                              rdfs:subClassOf dici_core:StaticAttribute ,
+                                              dici_core:UnitBasedCost ,
+                                              [ a owl:Restriction ;
+                                                owl:onProperty qudt:unit ;
+                                                owl:hasValue unit:KiloW-HR
+                                              ] ;
+                              rdfs:label "Energy Cost Attribute" ;
+                              dici_core:hasDefaultUnit unit:KiloW-HR .
+
+###  https://digicities.info/ontology#EnergyStorage
+dici_core:EnergyStorage a owl:Class ;
+                        rdfs:subClassOf dici_core:Storage ;
+                        rdfs:label "Energy Storage" .
+
+###  https://digicities.info/ontology#EnergyStorageAttribute
+dici_core:EnergyStorageAttribute a owl:Class ;
+                                 rdfs:subClassOf dici_core:StorageAttribute ;
+                                 rdfs:label "Energy Storage Attribute" .
+
+###  https://digicities.info/ontology#Flow
+dici_core:Flow a owl:Class ;
+               rdfs:subClassOf dici_core:Component ;
+               rdfs:comment "Represents the movement or transfer of energy, materials, or information between components"@en ;
+               rdfs:label "Flow" ;
+               dici_core:definition "A flow captures the dynamic transfer of entities (energy carriers, materials, etc.) between system components, including quantity, direction, and temporal characteristics"@en .
+
+###  https://digicities.info/ontology#FlowAttribute
+dici_core:FlowAttribute a owl:Class ;
+                        rdfs:subClassOf dici_core:ComponentAttribute ;
+                        rdfs:label "Flow Attribute" .
+
+###  https://digicities.info/ontology#FlowCapacity
+dici_core:FlowCapacity a owl:Class ;
+                       rdfs:subClassOf dici_core:FlowAttribute ,
+                                       dici_core:StaticAttribute ;
+                       rdfs:comment "Maximum flow rate capacity"@en ;
+                       rdfs:label "Flow Capacity" ;
+                       dici_core:hasDefaultUnit unit:KiloW .
+
+###  https://digicities.info/ontology#FlowRate
+dici_core:FlowRate a owl:Class ;
+                   rdfs:subClassOf dici_core:DynamicAttribute ,
+                                   dici_core:FlowAttribute ;
+                   rdfs:comment "Rate of flow over time"@en ;
+                   rdfs:label "Flow Rate" ;
+                   dici_core:hasDefaultUnit unit:KiloW .
+
+###  https://digicities.info/ontology#FlowSensor
+dici_core:FlowSensor a owl:Class ;
+                     rdfs:subClassOf dici_core:Sensor ;
+                     rdfs:label "Flow Sensor" ;
+                     dici_core:hasDefaultUnit unit:M3-PER-SEC .
+
+###  https://digicities.info/ontology#FuelCarrier
+dici_core:FuelCarrier a owl:Class ;
+                      rdfs:subClassOf dici_core:EnergyCarrier ;
+                      rdfs:label "Fuel Carrier" .
+
+###  https://digicities.info/ontology#FuelCarrierAttribute
+dici_core:FuelCarrierAttribute a owl:Class ;
+                               rdfs:subClassOf dici_core:EnergyCarrierAttribute .
+
+###  https://digicities.info/ontology#FutureTimeSeries
+dici_core:FutureTimeSeries a owl:Class ;
+                           rdfs:subClassOf dici_core:TimeSeries ;
+                           rdfs:comment "Time series data representing forecasted or projected future values"@en ;
+                           rdfs:label "Future Time Series" .
+
+###  https://digicities.info/ontology#GasFlow
+dici_core:GasFlow a owl:Class ;
+                  rdfs:subClassOf dici_core:EnergyCarrierFlow ;
+                  rdfs:label "Gas Flow" ;
+                  dici_core:hasDefaultUnit unit:M3-PER-SEC .
+
+###  https://digicities.info/ontology#GasMeter
+dici_core:GasMeter a owl:Class ;
+                   rdfs:subClassOf dici_core:Meter ;
+                   rdfs:label "Gas Meter" ;
+                   dici_core:hasDefaultUnit unit:M3 .
+
+###  https://digicities.info/ontology#GaseousFuelCarrier
+dici_core:GaseousFuelCarrier a owl:Class ;
+                             rdfs:subClassOf dici_core:FuelCarrier ;
+                             rdfs:label "Gaseous Fuel Carrier" .
+
+###  https://digicities.info/ontology#GaseousFuelCarrierAttribute
+dici_core:GaseousFuelCarrierAttribute a owl:Class ;
+                                      rdfs:subClassOf dici_core:FuelCarrierAttribute .
+
+###  https://digicities.info/ontology#GeospatialAttribute
+dici_core:GeospatialAttribute a owl:Class ;
+                              rdfs:subClassOf dici_core:Attribute ;
+                              rdfs:label "Geospatial Attribute" .
+
+###  https://digicities.info/ontology#HeatCarrier
+dici_core:HeatCarrier a owl:Class ;
+                      rdfs:subClassOf dici_core:ThermalEnergyCarrier ;
+                      rdfs:label "Heat Carrier" .
+
+###  https://digicities.info/ontology#HeatCarrierAttribute
+dici_core:HeatCarrierAttribute a owl:Class ;
+                               rdfs:subClassOf dici_core:ThermalEnergyCarrierAttribute .
+
+###  https://digicities.info/ontology#HeatFlow
+dici_core:HeatFlow a owl:Class ;
+                   rdfs:subClassOf dici_core:EnergyCarrierFlow ;
+                   rdfs:label "Heat Flow" ;
+                   dici_core:hasDefaultUnit unit:KiloW .
+
+###  https://digicities.info/ontology#HeatMeter
+dici_core:HeatMeter a owl:Class ;
+                    rdfs:subClassOf dici_core:Meter ;
+                    rdfs:label "Heat Meter" ;
+                    dici_core:hasDefaultUnit unit:KiloW-HR .
+
+###  https://digicities.info/ontology#HistoricTimeSeries
+dici_core:HistoricTimeSeries a owl:Class ;
+                             rdfs:subClassOf dici_core:TimeSeries ;
+                             rdfs:comment "Time series data representing past measurements or observations"@en ;
+                             rdfs:label "Historic Time Series" .
+
+###  https://digicities.info/ontology#InformationFlow
+dici_core:InformationFlow a owl:Class ;
+                          rdfs:subClassOf dici_core:Flow ;
+                          rdfs:comment "Flow of information or control signals between components"@en ;
+                          rdfs:label "Information Flow" .
+
+###  https://digicities.info/ontology#InformationFlowAttribute
+dici_core:InformationFlowAttribute a owl:Class ;
+                                   rdfs:subClassOf dici_core:FlowAttribute .
+
+###  https://digicities.info/ontology#Junction
+dici_core:Junction a owl:Class ;
+                   rdfs:subClassOf dici_core:Component ;
+                   rdfs:comment "Component where multiple flows meet or diverge"@en ;
+                   rdfs:label "Junction" ;
+                   dici_core:definition "Junctions represent nodes where flows can be split, merged, or redirected without transformation"@en .
+
+###  https://digicities.info/ontology#JunctionAttribute
+dici_core:JunctionAttribute a owl:Class ;
+                            rdfs:subClassOf dici_core:ComponentAttribute ;
+                            rdfs:label "Junction Attribute" .
+
+###  https://digicities.info/ontology#LiquidFuel
+dici_core:LiquidFuel a owl:Class ;
+                     rdfs:subClassOf dici_core:FuelCarrier ;
+                     rdfs:label "Liquid Fuel Carrier" .
+
+###  https://digicities.info/ontology#LiquidFuelCarrierAttribute
+dici_core:LiquidFuelCarrierAttribute a owl:Class ;
+                                     rdfs:subClassOf dici_core:FuelCarrierAttribute .
+
+###  https://digicities.info/ontology#LiquidFuelFlow
+dici_core:LiquidFuelFlow a owl:Class ;
+                         rdfs:subClassOf dici_core:EnergyCarrierFlow ;
+                         rdfs:label "Liquid Fuel Flow" ;
+                         dici_core:hasDefaultUnit unit:L-PER-SEC .
+
+###  https://digicities.info/ontology#LiveTimeSeries
+dici_core:LiveTimeSeries a owl:Class ;
+                         rdfs:subClassOf dici_core:TimeSeries ;
+                         rdfs:comment "Time series data representing real-time or near real-time measurements"@en ;
+                         rdfs:label "Live Time Series" .
+
+###  https://digicities.info/ontology#Location
+dici_core:Location a owl:Class ;
+                   rdfs:subClassOf dici_core:Component ;
+                   rdfs:comment "Spatial entity representing geographic areas or specific sites"@en ;
+                   rdfs:label "Location" ;
+                   dici_core:definition "Locations provide spatial context for components and flows, enabling geographic analysis and constraints"@en .
+
+###  https://digicities.info/ontology#LocationAttribute
+dici_core:LocationAttribute a owl:Class ;
+                            rdfs:subClassOf dici_core:ComponentAttribute ;
+                            rdfs:label "Location Attribute" .
+
+###  https://digicities.info/ontology#MaterialConverter
+dici_core:MaterialConverter a owl:Class ;
+                            rdfs:subClassOf dici_core:Converter ;
+                            rdfs:label "Material Converter" .
+
+###  https://digicities.info/ontology#MaterialConverterAttribute
+dici_core:MaterialConverterAttribute a owl:Class ;
+                                     rdfs:subClassOf dici_core:ConverterAttribute .
+
+###  https://digicities.info/ontology#MaterialFlow
+dici_core:MaterialFlow a owl:Class ;
+                       rdfs:subClassOf dici_core:Flow ;
+                       rdfs:comment "Flow of materials between components"@en ;
+                       rdfs:label "Material Flow" .
+
+###  https://digicities.info/ontology#MaterialFlowAttribute
+dici_core:MaterialFlowAttribute a owl:Class ;
+                                rdfs:subClassOf dici_core:FlowAttribute ;
+                                rdfs:label "Material Flow Attribute" .
+
+###  https://digicities.info/ontology#MaterialStorage
+dici_core:MaterialStorage a owl:Class ;
+                          rdfs:subClassOf dici_core:Storage ;
+                          rdfs:label "Material Storage" .
+
+###  https://digicities.info/ontology#MeasurementAccuracy
+dici_core:MeasurementAccuracy a owl:Class ;
+                              rdfs:subClassOf dici_core:DeviceAttribute ,
+                                              dici_core:StaticAttribute ;
+                              rdfs:comment "Accuracy specification of a measuring device"@en ;
+                              rdfs:label "Measurement Accuracy" ;
+                              dici_core:hasDefaultUnit unit:PERCENT .
+
+###  https://digicities.info/ontology#MeasurementValue
+dici_core:MeasurementValue a owl:Class ;
+                           rdfs:subClassOf dici_core:DynamicAttribute ,
+                                           dici_core:SensorAttribute ;
+                           rdfs:comment "Current measured value from a sensor"@en ;
+                           rdfs:label "Measurement Value" .
+
+###  https://digicities.info/ontology#Meter
+dici_core:Meter a owl:Class ;
+                rdfs:subClassOf dici_core:Device ;
+                rdfs:comment "Device that measures and records consumption or production of resources"@en ;
+                rdfs:label "Meter" ;
+                dici_core:definition "Meters measure cumulative quantities like energy consumption, flow volumes, or resource usage over time"@en .
+
+###  https://digicities.info/ontology#MeterAttribute
+dici_core:MeterAttribute a owl:Class ;
+                         rdfs:subClassOf dici_core:DeviceAttribute ;
+                         rdfs:label "Meter Attribute" .
+
+###  https://digicities.info/ontology#MeterReading
+dici_core:MeterReading a owl:Class ;
+                       rdfs:subClassOf dici_core:DynamicAttribute ,
+                                       dici_core:MeterAttribute ;
+                       rdfs:comment "Cumulative measurement from a meter"@en ;
+                       rdfs:label "Meter Reading" .
+
+###  https://digicities.info/ontology#Network
+dici_core:Network a owl:Class ;
+                  rdfs:subClassOf dici_core:Component ;
+                  rdfs:comment "Infrastructure for transporting energy carriers or materials"@en ;
+                  rdfs:label "Network" ;
+                  dici_core:definition "Networks represent the physical infrastructure that enables flows between components, such as electrical grids, gas pipelines, or district heating networks"@en .
+
+###  https://digicities.info/ontology#NetworkAttribute
+dici_core:NetworkAttribute a owl:Class ;
+                           rdfs:subClassOf dici_core:ComponentAttribute ;
+                           rdfs:label "Network Attribute" .
+
+###  https://digicities.info/ontology#NonRenewableResource
+dici_core:NonRenewableResource a owl:Class ;
+                               rdfs:subClassOf dici_core:Resource ;
+                               rdfs:label "Non Renewable Resource" .
+
+###  https://digicities.info/ontology#NonRenewableResourceAttribute
+dici_core:NonRenewableResourceAttribute a owl:Class ;
+                                        rdfs:subClassOf dici_core:ResourceAttribute .
+
+###  https://digicities.info/ontology#PowerSensor
+dici_core:PowerSensor a owl:Class ;
+                      rdfs:subClassOf dici_core:Sensor ;
+                      rdfs:label "Power Sensor" ;
+                      dici_core:hasDefaultUnit unit:KiloW .
+
+###  https://digicities.info/ontology#PressureSensor
+dici_core:PressureSensor a owl:Class ;
+                         rdfs:subClassOf dici_core:Sensor ;
+                         rdfs:label "Pressure Sensor" ;
+                         dici_core:hasDefaultUnit unit:PA .
+
+###  https://digicities.info/ontology#Process
+dici_core:Process a owl:Class ;
+                  rdfs:subClassOf dici_core:Component ;
+                  rdfs:comment "A process that transforms, transports, or modifies flows of energy or materials"@en ;
+                  rdfs:label "Process" ;
+                  dici_core:definition "A process represents any activity or operation that has input and output flows, including energy conversion, material transformation, or transport operations"@en .
+
+###  https://digicities.info/ontology#ProcessAttribute
+dici_core:ProcessAttribute a owl:Class ;
+                           rdfs:subClassOf dici_core:ComponentAttribute ;
+                           rdfs:label "Process Attribute" .
+
+###  https://digicities.info/ontology#ProcessCapacity
+dici_core:ProcessCapacity a owl:Class ;
+                          rdfs:subClassOf dici_core:ProcessAttribute ,
+                                          dici_core:StaticAttribute ;
+                          rdfs:comment "Maximum processing capacity"@en ;
+                          rdfs:label "Process Capacity" ;
+                          dici_core:hasDefaultUnit unit:KiloW .
+
+###  https://digicities.info/ontology#RenewableResource
+dici_core:RenewableResource a owl:Class ;
+                            rdfs:subClassOf dici_core:Resource ;
+                            rdfs:label "Renewable Resource" .
+
+###  https://digicities.info/ontology#RenewableResourceAttribute
+dici_core:RenewableResourceAttribute a owl:Class ;
+                                     rdfs:subClassOf dici_core:ResourceAttribute .
+
+###  https://digicities.info/ontology#Resource
+dici_core:Resource a owl:Class ;
+                   rdfs:subClassOf dici_core:Component ;
+                   rdfs:label "Resource" .
+
+###  https://digicities.info/ontology#ResourceAttribute
+dici_core:ResourceAttribute a owl:Class ;
+                            rdfs:subClassOf dici_core:ComponentAttribute .
+
+###  https://digicities.info/ontology#SamplingRate
+dici_core:SamplingRate a owl:Class ;
+                       rdfs:subClassOf dici_core:SensorAttribute ,
+                                       dici_core:StaticAttribute ;
+                       rdfs:comment "Frequency of measurements or readings"@en ;
+                       rdfs:label "Sampling Rate" ;
+                       dici_core:hasDefaultUnit unit:HZ .
+
+###  https://digicities.info/ontology#Scenario
+dici_core:Scenario a owl:Class .
+
+###  https://digicities.info/ontology#Sensor
+dici_core:Sensor a owl:Class ;
+                 rdfs:subClassOf dici_core:Device ;
+                 rdfs:comment "Device that measures physical quantities and converts them to signals"@en ;
+                 rdfs:label "Sensor" ;
+                 dici_core:definition "Sensors detect and respond to inputs from the physical environment, providing data for monitoring and control"@en .
+
+###  https://digicities.info/ontology#SensorAttribute
+dici_core:SensorAttribute a owl:Class ;
+                          rdfs:subClassOf dici_core:DeviceAttribute ;
+                          rdfs:label "Sensor Attribute" .
+
+###  https://digicities.info/ontology#Service
+dici_core:Service a owl:Class .
+
+###  https://digicities.info/ontology#ServiceRequirement
+dici_core:ServiceRequirement a owl:Class .
+
+###  https://digicities.info/ontology#SetPoint
+dici_core:SetPoint a owl:Class ;
+                   rdfs:subClassOf dici_core:ControllerAttribute ,
+                                   dici_core:DynamicAttribute ;
+                   rdfs:comment "Target value for a controller"@en ;
+                   rdfs:label "Set Point" .
+
+###  https://digicities.info/ontology#SimpleCost
+dici_core:SimpleCost a owl:Class ;
+                     rdfs:subClassOf dici_core:CostAttribute ,
+                                     [ a owl:Restriction ;
+                                       owl:onProperty dici_core:currency ;
+                                       owl:someValuesFrom fibo-currency:Currency
+                                     ] ,
+                                     [ a owl:Restriction ;
+                                       owl:onProperty qudt:numericValue ;
+                                       owl:someValuesFrom xsd:decimal
+                                     ] ;
+                     rdfs:label "Simple Cost" .
+
+###  https://digicities.info/ontology#SolarResource
+dici_core:SolarResource a owl:Class ;
+                        rdfs:subClassOf dici_core:RenewableResource ;
+                        rdfs:label "Solar Resource" .
+
+###  https://digicities.info/ontology#SolarResourceAttribute
+dici_core:SolarResourceAttribute a owl:Class ;
+                                 rdfs:subClassOf dici_core:RenewableResourceAttribute .
+
+###  https://digicities.info/ontology#SolidFuel
+dici_core:SolidFuel a owl:Class ;
+                    rdfs:subClassOf dici_core:FuelCarrier ;
+                    rdfs:label "Solid Fuel Carrier" .
+
+###  https://digicities.info/ontology#SolidFuelCarrierAttribute
+dici_core:SolidFuelCarrierAttribute a owl:Class ;
+                                    rdfs:subClassOf dici_core:FuelCarrierAttribute .
+
+###  https://digicities.info/ontology#StateOfCharge
+dici_core:StateOfCharge a owl:Class ;
+                        rdfs:subClassOf dici_core:DynamicAttribute ,
+                                        dici_core:EnergyStorageAttribute ;
+                        rdfs:comment "Current state of charge as percentage of capacity"@en ;
+                        rdfs:label "State of Charge" ;
+                        dici_core:hasDefaultUnit unit:PERCENT .
+
+###  https://digicities.info/ontology#StaticAttribute
+dici_core:StaticAttribute a owl:Class ;
+                          rdfs:subClassOf dici_core:Attribute ;
+                          rdfs:label "Static Attribute" .
+
+###  https://digicities.info/ontology#Storage
+dici_core:Storage a owl:Class ;
+                  rdfs:subClassOf dici_core:Component ;
+                  rdfs:comment "Component that stores energy or materials over time"@en ;
+                  rdfs:label "Storage" ;
+                  dici_core:definition "Storage components accumulate and release energy or materials, providing temporal flexibility to the system"@en .
+
+###  https://digicities.info/ontology#StorageAttribute
+dici_core:StorageAttribute a owl:Class ;
+                           rdfs:subClassOf dici_core:ComponentAttribute ;
+                           rdfs:label "Storage Attribute" .
+
+###  https://digicities.info/ontology#StorageCapacity
+dici_core:StorageCapacity a owl:Class ;
+                          rdfs:subClassOf dici_core:StaticAttribute ,
+                                          dici_core:StorageAttribute ;
+                          rdfs:comment "Maximum storage capacity"@en ;
+                          rdfs:label "Storage Capacity" ;
+                          dici_core:hasDefaultUnit unit:KiloW-HR .
+
+###  https://digicities.info/ontology#StorageProcess
+dici_core:StorageProcess a owl:Class ;
+                         rdfs:subClassOf dici_core:Process ;
+                         rdfs:comment "Process that stores and releases energy or materials over time"@en ;
+                         rdfs:label "Storage Process" .
+
+###  https://digicities.info/ontology#Switch
+dici_core:Switch a owl:Class ;
+                 rdfs:subClassOf dici_core:Device ;
+                 rdfs:comment "Device that can interrupt or divert the flow of energy or materials"@en ;
+                 rdfs:label "Switch" ;
+                 dici_core:definition "Switches control the routing or interruption of flows in the system"@en .
+
+###  https://digicities.info/ontology#SwitchAttribute
+dici_core:SwitchAttribute a owl:Class ;
+                          rdfs:subClassOf dici_core:DeviceAttribute ;
+                          rdfs:label "Switch Attribute" .
+
+###  https://digicities.info/ontology#SwitchState
+dici_core:SwitchState a owl:Class ;
+                      rdfs:subClassOf dici_core:DynamicAttribute ,
+                                      dici_core:SwitchAttribute ;
+                      rdfs:comment "Current state of a switch (open/closed, on/off)"@en ;
+                      rdfs:label "Switch State" .
+
+###  https://digicities.info/ontology#TemperatureSensor
+dici_core:TemperatureSensor a owl:Class ;
+                            rdfs:subClassOf dici_core:Sensor ;
+                            rdfs:label "Temperature Sensor" ;
+                            dici_core:hasDefaultUnit unit:DEG_C .
+
+###  https://digicities.info/ontology#ThermalEnergyCarrier
+dici_core:ThermalEnergyCarrier a owl:Class ;
+                               rdfs:subClassOf dici_core:EnergyCarrier ;
+                               rdfs:label "Thermal Energy Carrier" .
+
+###  https://digicities.info/ontology#ThermalEnergyCarrierAttribute
+dici_core:ThermalEnergyCarrierAttribute a owl:Class ;
+                                        rdfs:subClassOf dici_core:EnergyCarrierAttribute .
+
+###  https://digicities.info/ontology#TimeSeries
+dici_core:TimeSeries a owl:Class ;
+                     rdfs:comment "A sequence of data points indexed in time order, typically used to represent dynamic attributes over time"@en ;
+                     rdfs:label "Time Series" ;
+                     dici_core:definition "A time series is a series of data points indexed (or listed or graphed) in time order. Time series data is used to track changes over time for dynamic attributes."@en .
+
+###  https://digicities.info/ontology#TransportProcess
+dici_core:TransportProcess a owl:Class ;
+                           rdfs:subClassOf dici_core:Process ;
+                           rdfs:comment "Process that transports energy or materials without transformation"@en ;
+                           rdfs:label "Transport Process" .
+
+###  https://digicities.info/ontology#TransportProcessAttribute
+dici_core:TransportProcessAttribute a owl:Class ;
+                                    rdfs:subClassOf dici_core:ProcessAttribute ;
+                                    rdfs:label "Transport Process Attribute" .
+
+###  https://digicities.info/ontology#Turbine
+dici_core:Turbine a owl:Class ;
+                  rdfs:subClassOf dici_core:EnergyConverter ;
+                  rdfs:label "Turbine" .
+
+###  https://digicities.info/ontology#UnitBasedCost
+dici_core:UnitBasedCost a owl:Class ;
+                        rdfs:subClassOf dici_core:CostAttribute ,
+                                        [ a owl:Restriction ;
+                                          owl:onProperty qudt:unit ;
+                                          owl:someValuesFrom qudt:Unit
+                                        ] ,
+                                        [ a owl:Restriction ;
+                                          owl:onProperty dici_core:currency ;
+                                          owl:someValuesFrom fibo-currency:Currency
+                                        ] ,
+                                        [ a owl:Restriction ;
+                                          owl:onProperty qudt:numericValue ;
+                                          owl:someValuesFrom xsd:decimal
+                                        ] ;
+                        rdfs:label "Unit-based Cost" .
+
+###  https://digicities.info/ontology#Valve
+dici_core:Valve a owl:Class ;
+                rdfs:subClassOf dici_core:Actuator ;
+                rdfs:comment "Actuator that controls fluid flow"@en ;
+                rdfs:label "Valve" .
+
+###  https://digicities.info/ontology#Wind
+dici_core:Wind a owl:Class ;
+               rdfs:subClassOf dici_core:RenewableResource ;
+               rdfs:label "Wind Resource" .
+
+###  https://digicities.info/ontology#WindResourceAttribute
+dici_core:WindResourceAttribute a owl:Class ;
+                                rdfs:subClassOf dici_core:RenewableResourceAttribute .
+
+###  https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/Currency
+fibo-currency:Currency a owl:Class .
+
+###  http://qudt.org/vocab/unit/KiloW-HR
+unit:KiloW-HR a owl:NamedIndividual .

@@ -1,0 +1,39 @@
+services:
+
+  ## --------------------------------------
+  ## Use Ontotext GraphDB as graph database
+  ## --------------------------------------
+  graphdb:
+    image: "ontotext/graphdb:10.8.10"
+    restart: unless-stopped
+    command: [
+      "-Dgraphdb.workbench.importDirectory=/var/graphdb/import"
+    ]
+    volumes:
+      - ./imports:/var/graphdb/import:ro
+    ports:
+     - "7200:7200"
+    healthcheck:
+      test: [
+        "CMD-SHELL", "curl -f http://localhost:7200/rest/repositories || exit 1"
+      ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  ## -------------------------------------------------
+  ## Use GraphDB's REST API to create a new repository
+  ## -------------------------------------------------
+  graphdb-setup:
+    image: "ontotext/graphdb:10.8.10"
+    environment:
+      - GRAPHDB_REPO_NAME=REFORMERS
+    volumes:
+      - ./api:/api:ro
+      - ./data:/imports:ro
+    entrypoint: [
+      "/bin/sh", "-c",  "/api/setup.sh"
+    ]
+    depends_on:
+      graphdb:
+        condition: service_healthy

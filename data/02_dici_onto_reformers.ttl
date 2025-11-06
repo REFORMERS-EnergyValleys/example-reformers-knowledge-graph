@@ -1,0 +1,213 @@
+@prefix dici_core: <urn:digicities:core#> .
+@prefix dici_reformers: <urn:digicities:reformers#> .
+@prefix jsonschema: <https://www.w3.org/2019/wot/json-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix unit: <http://qudt.org/vocab/unit/> .
+
+dici_reformers:GlobalWindAtlasSite a owl:Class ;
+    rdfs:label "GlobalWindAtlasSite" ;
+    rdfs:subClassOf dici_core:Location .
+
+dici_reformers:GlobalWindAtlasSiteAttribute a owl:Class ;
+    rdfs:label "GlobalWindAtlasSite Attribute" ;
+    rdfs:subClassOf dici_core:LocationAttribute .
+
+dici_reformers:Roughness a owl:Class ;
+    rdfs:label "Roughness" ;
+    rdfs:subClassOf dici_core:StaticAttribute,
+        dici_reformers:GlobalWindAtlasSiteAttribute ;
+    dici_core:hasDefaultUnit unit:UNITLESS .
+
+dici_reformers:WindTurbine a owl:Class ;
+    rdfs:label "Wind Turbine" ;
+    rdfs:subClassOf dici_core:Turbine .
+
+dici_reformers:TurbineAttribute a owl:Class ;
+    rdfs:subClassOf dici_core:EnergyConverterAttribute .
+
+dici_reformers:WindTurbineAttribute a owl:Class ;
+    rdfs:label "WindTurbine Attribute" ;
+    rdfs:subClassOf dici_reformers:TurbineAttribute .
+
+dici_reformers:HubHeight a owl:Class ;
+    rdfs:label "Hub Height" ;
+    rdfs:subClassOf dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit unit:M .
+
+dici_reformers:RotorDiameter a owl:Class ;
+    rdfs:label "Rotor Diameter" ;
+    rdfs:subClassOf dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit unit:M .
+
+dici_reformers:RatedPower a owl:Class ;
+    rdfs:label "Rated Power" ;
+    rdfs:subClassOf dici_core:StaticAttribute,
+        dici_reformers:TurbineAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit unit:MegaW .
+
+dici_reformers:MaxOperatingPower a owl:Class ;
+    rdfs:label "MaxOperatingPower" ;
+    rdfs:subClassOf dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit unit:MegaW .
+
+dici_reformers:MinOperatingPower a owl:Class ;
+    rdfs:label "MinOperatingPower" ;
+    rdfs:subClassOf dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit unit:MegaW .
+
+dici_reformers:DefaultInitialActivePower a owl:Class ;
+    rdfs:label "Default Initial Active Power",
+        "DefaultInitialActivePower" ;
+    rdfs:subClassOf dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit unit:MegaW .
+
+dici_reformers:PowerCurve a owl:Class ;
+    rdfs:label "Power Curve" ;
+    rdfs:subClassOf dici_core:CurveAttribute,
+        dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit [ dici_core:xUnit unit:M-PER-SEC ;
+            dici_core:yUnit unit:W ] .
+
+dici_reformers:ThrustCurve a owl:Class ;
+    rdfs:label "Thrust Curve" ;
+    rdfs:subClassOf dici_core:CurveAttribute,
+        dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit [ dici_core:xUnit unit:M-PER-SEC ;
+            dici_core:yUnit unit:N ] .
+
+dici_reformers:Altitude a owl:Class ;
+    rdfs:label "Altitude" ;
+    rdfs:subClassOf dici_core:GeospatialAttribute,
+        dici_core:StaticAttribute ;
+    dici_core:hasDefaultUnit unit:M .
+
+dici_reformers:Latitude a owl:Class ;
+    rdfs:label "Latitude" ;
+    rdfs:subClassOf dici_core:GeospatialAttribute,
+        dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit unit:DEG .
+
+dici_reformers:Longitude a owl:Class ;
+    rdfs:label "Longitude" ;
+    rdfs:subClassOf dici_core:GeospatialAttribute,
+        dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit unit:DEG .
+
+dici_reformers:Elevation a owl:Class ;
+    rdfs:label "Elevation" ;
+    rdfs:subClassOf dici_core:GeospatialAttribute,
+        dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
+    dici_core:hasDefaultUnit unit:M .
+
+dici_reformers:hasGlobalWindAtlasSiteAttribute a owl:ObjectProperty ;
+    rdfs:domain dici_reformers:GlobalWindAtlasSite ;
+    rdfs:range dici_reformers:Roughness ;
+    rdfs:subPropertyOf dici_core:hasLocationAttribute .
+
+dici_reformers:hasGlobalWindAtlasSiteRoughnessAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:Roughness ;
+    rdfs:subPropertyOf dici_reformers:hasGlobalWindAtlasSiteAttribute .
+
+dici_reformers:hasComponentAltitudeAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:Altitude ;
+    rdfs:subPropertyOf dici_core:hasComponentAttribute .
+
+dici_reformers:hasComponentLatitudeAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:Latitude ;
+    rdfs:subPropertyOf dici_core:hasComponentAttribute .
+
+dici_reformers:hasComponentLongitudeAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:Longitude ;
+    rdfs:subPropertyOf dici_core:hasComponentAttribute .
+
+dici_reformers:hasWindTurbineDefaultInitialActivePowerAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:DefaultInitialActivePower ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbineElevationAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:Elevation ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbineHubHeightAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:HubHeight ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbineLatitudeAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:Latitude ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbineLongitudeAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:Longitude ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbineMaxOperatingPowerAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:MaxOperatingPower ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbineMinOperatingPowerAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:MinOperatingPower ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbinePowerCurveAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:PowerCurve ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbineRatedPowerAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:RatedPower ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbineRotorDiameterAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:RotorDiameter ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasWindTurbineThrustCurveAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:ThrustCurve ;
+    rdfs:subPropertyOf dici_reformers:hasWindTurbineAttribute .
+
+dici_reformers:hasTurbineAttribute a owl:ObjectProperty ;
+    rdfs:range dici_reformers:Elevation ;
+    rdfs:subPropertyOf dici_core:hasEnergyConverterAttribute .
+
+dici_reformers:hasWindTurbineAttribute a owl:ObjectProperty ;
+    rdfs:domain dici_reformers:WindTurbine ;
+    rdfs:range dici_reformers:DefaultInitialActivePower,
+        dici_reformers:Elevation,
+        dici_reformers:HubHeight,
+        dici_reformers:Latitude,
+        dici_reformers:Longitude,
+        dici_reformers:MaxOperatingPower,
+        dici_reformers:MinOperatingPower,
+        dici_reformers:PowerCurve,
+        dici_reformers:RatedPower,
+        dici_reformers:RotorDiameter,
+        dici_reformers:ThrustCurve ;
+    rdfs:subPropertyOf dici_reformers:hasTurbineAttribute .
+
+dici_reformers:CurveDataSchema
+  a jsonschema:ArraySchema ;
+  jsonschema:items dici_reformers:PointTupleSchema .
+
+dici_reformers:PointTupleSchema
+  a jsonschema:ArraySchema ;
+  # tuple validation with an RDF list of exactly two item schemas
+  jsonschema:items (
+    dici_reformers:xValueSchema
+    dici_reformers:yValueSchema
+  ) ;
+  jsonschema:minItems 2 ;
+  jsonschema:maxItems 2 .
+
+dici_reformers:xValueSchema a jsonschema:NumberSchema .
+dici_reformers:yValueSchema a jsonschema:NumberSchema .
