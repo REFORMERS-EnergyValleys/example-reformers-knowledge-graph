@@ -10,7 +10,7 @@ services:
       "-Dgraphdb.workbench.importDirectory=/var/graphdb/import"
     ]
     volumes:
-      - ./imports:/var/graphdb/import:ro
+      - ./data:/var/graphdb/import:ro
     ports:
      - "7200:7200"
     healthcheck:
@@ -30,7 +30,7 @@ services:
       - GRAPHDB_REPO_NAME=REFORMERS
     volumes:
       - ./api:/api:ro
-      - ./data:/imports:ro
+      - ./data:/import:ro
     entrypoint: [
       "/bin/sh", "-c",  "/api/setup.sh"
     ]

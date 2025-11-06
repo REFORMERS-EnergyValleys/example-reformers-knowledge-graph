@@ -15,7 +15,7 @@ if [ "${REPO_HTTP_STATUS}" -eq "404" ]; then
     curl -s -X POST "${GRAPHDB_HOST}:${GRAPHDB_PORT}/rest/repositories" -H "Content-Type: multipart/form-data" -F "config=@/tmp/repo-config.ttl"
 
     # List files to be imported to the repository
-    mapfile -d '' entries < <(find "/imports" -maxdepth 1 -mindepth 1 -printf '%f\0' | sort -z)
+    mapfile -d '' entries < <(find "/import" -maxdepth 1 -mindepth 1 -printf '%f\0' | sort -z)
 
     # Create JSON-formatted file list
     { printf '{"fileNames":['
