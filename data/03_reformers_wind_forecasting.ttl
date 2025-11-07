@@ -11,9 +11,15 @@
 @prefix windpark_alkmaar: <urn:reformers:wind_forecasting:windpark_alkmaar:> .
 @prefix wind_turbine: <urn:reformers:wind_forecasting:wind_turbine:> .
 
+#
+# Scenario: BaselineAlkmaar
+#
 wind_forecasting:BaselineAlkmaar a dici_core:Scenario ;
     rdfs:label "BaselineAlkmaar" .
 
+#
+# GlobalWindAtlasSite: Windpark Alkmaar
+#
 windpark_alkmaar:WindparkAlkmaar a dici_reformers:GlobalWindAtlasSite ;
     rdfs:label "WindparkAlkmaar" ;
     dici_reformers:hasGlobalWindAtlasSiteRoughnessAttribute windpark_alkmaar:Roughness ;
@@ -23,124 +29,237 @@ windpark_alkmaar:Roughness a dici_reformers:Roughness ;
     qudt:value "1.0"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
-wind_turbine:Turbine0 a dici_reformers:WindTurbine ;
-    rdfs:label "Turbine0" ;
-    dici_reformers:hasWindTurbineHubHeightAttribute wind_turbine:Turbine0:HubHeight ;
-    dici_reformers:hasWindTurbinePowerCurveAttribute wind_turbine:Turbine0:PowerCurve ;
-    dici_reformers:hasWindTurbineRatedPowerAttribute wind_turbine:Turbine0:RatedPower ;
-    dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine0:RotorDiameter ;
+#
+# Turbine 1: Alkmaar 1 (2.3 MW)
+#
+wind_turbine:Turbine1 a dici_reformers:WindTurbine ;
+    rdfs:label "Alkmaar 1" ;
+    dici_reformers:hasWindTurbineAltitudeAttribute wind_turbine:Turbine1:Altitude ;
+    dici_reformers:hasWindTurbineLatitudeAttribute wind_turbine:Turbine1:Latitude ;
+    dici_reformers:hasWindTurbineLongitudeAttribute wind_turbine:Turbine1:Longitude ;
+    dici_reformers:hasWindTurbineHubHeightAttribute wind_turbine:Turbine1:HubHeight ;
+    dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine1:RatedPower ;
+    dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine1:RotorDiameter ;
+    dici_reformers:hasWindTurbineWindTurbineTypeAttribute wind_turbine:Type:Alkmaar_2p3MW ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
-wind_turbine:Turbine0:HubHeight a dici_reformers:HubHeight ;
+wind_turbine:Turbine1:Altitude a dici_reformers:Altitude ;
+    qudt:value "10.0"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine1:Latitude a dici_reformers:Latitude ;
+    qudt:value "52.592999"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine1:Longitude a dici_reformers:Longitude ;
+    qudt:value "4.752301"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine1:HubHeight a dici_reformers:HubHeight ;
     qudt:value "8500.0"^^xsd:decimal ;
     dici_core:hasUnit qudt-unit:CentiM ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
-wind_turbine:Turbine0:PowerCurve a dici_reformers:PowerCurve ;
-    dct:conformsTo dici_reformers:CurveDataSchema ;
-    qudt:value "[[1.0,0.0],[2.0,3000.0],[3.0,25000.0],[4.0,82000.0],[5.0,174000.0],[6.0,321000.0],[7.0,532000.0],[8.0,815000.0],[9.0,1180000.0],[10.0,1580000.0],[11.0,1890000.0],[12.0,2100000.0],[13.0,2250000.0],[14.0,2350000.0],[15.0,2350000.0],[16.0,2350000.0],[17.0,2350000.0],[18.0,2350000.0],[19.0,2350000.0],[20.0,2350000.0],[21.0,2350000.0],[22.0,2350000.0],[23.0,2350000.0],[24.0,2350000.0],[25.0,2350000.0]]"^^jsonschema:Json ;
-    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
-
-wind_turbine:Turbine0:RatedPower a dici_reformers:RatedPower ;
-    qudt:value "3.0"^^xsd:decimal ;
-    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
-
-wind_turbine:Turbine0:RotorDiameter a dici_reformers:RotorDiameter ;
-    qudt:value "82.0"^^xsd:decimal ;
-    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
-
-wind_turbine:Turbine1 a dici_reformers:WindTurbine ;
-    rdfs:label "Turbine1" ;
-    dici_reformers:hasWindTurbineHubHeightAttribute wind_turbine:Turbine1:HubHeight ;
-    dici_reformers:hasWindTurbinePowerCurveAttribute wind_turbine:Turbine1:PowerCurve ;
-    dici_reformers:hasWindTurbineRatedPowerAttribute wind_turbine:Turbine1:RatedPower ;
-    dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine1:RotorDiameter ;
-    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
-
-wind_turbine:Turbine1:HubHeight a dici_reformers:HubHeight ;
-    qudt:value "85.0"^^xsd:decimal ;
-    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
-
-wind_turbine:Turbine1:PowerCurve a dici_reformers:PowerCurve ;
-    dct:conformsTo dici_reformers:CurveDataSchema ;
-    qudt:value "[[1.0,0.0],[2.0,3000.0],[3.0,25000.0],[4.0,82000.0],[5.0,174000.0],[6.0,321000.0],[7.0,532000.0],[8.0,815000.0],[9.0,1180000.0],[10.0,1580000.0],[11.0,1890000.0],[12.0,2100000.0],[13.0,2250000.0],[14.0,2350000.0],[15.0,2350000.0],[16.0,2350000.0],[17.0,2350000.0],[18.0,2350000.0],[19.0,2350000.0],[20.0,2350000.0],[21.0,2350000.0],[22.0,2350000.0],[23.0,2350000.0],[24.0,2350000.0],[25.0,2350000.0]]"^^jsonschema:Json ;
-    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
-
 wind_turbine:Turbine1:RatedPower a dici_reformers:RatedPower ;
-    qudt:value "3.0"^^xsd:decimal ;
+    qudt:value "2.3"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
 wind_turbine:Turbine1:RotorDiameter a dici_reformers:RotorDiameter ;
-    qudt:value "82.0"^^xsd:decimal ;
+    qudt:value "8200.0"^^xsd:decimal ;
+    dici_core:hasUnit qudt-unit:CentiM ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
+#
+# Turbine 2: Alkmaar 2 (2.3 MW)
+#
 wind_turbine:Turbine2 a dici_reformers:WindTurbine ;
-    rdfs:label "Turbine2" ;
+    rdfs:label "Alkmaar 2" ;
+    dici_reformers:hasWindTurbineAltitudeAttribute wind_turbine:Turbine2:Altitude ;
+    dici_reformers:hasWindTurbineLatitudeAttribute wind_turbine:Turbine2:Latitude ;
+    dici_reformers:hasWindTurbineLongitudeAttribute wind_turbine:Turbine2:Longitude ;
     dici_reformers:hasWindTurbineHubHeightAttribute wind_turbine:Turbine2:HubHeight ;
-    dici_reformers:hasWindTurbinePowerCurveAttribute wind_turbine:Turbine2:PowerCurve ;
-    dici_reformers:hasWindTurbineRatedPowerAttribute wind_turbine:Turbine2:RatedPower ;
+    dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine2:RatedPower ;
     dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine2:RotorDiameter ;
+    dici_reformers:hasWindTurbineWindTurbineTypeAttribute wind_turbine:Type:Alkmaar_2p3MW ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine2:Altitude a dici_reformers:Altitude ;
+    qudt:value "120.0"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine2:Latitude a dici_reformers:Latitude ;
+    qudt:value "52.595889"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine2:Longitude a dici_reformers:Longitude ;
+    qudt:value "4.753783"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
 wind_turbine:Turbine2:HubHeight a dici_reformers:HubHeight ;
     qudt:value "85.0"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
-wind_turbine:Turbine2:PowerCurve a dici_reformers:PowerCurve ;
-    dct:conformsTo dici_reformers:CurveDataSchema ;
-    qudt:value "[[1.0,0.0],[2.0,3000.0],[3.0,25000.0],[4.0,82000.0],[5.0,174000.0],[6.0,321000.0],[7.0,532000.0],[8.0,815000.0],[9.0,1180000.0],[10.0,1580000.0],[11.0,1890000.0],[12.0,2100000.0],[13.0,2250000.0],[14.0,2350000.0],[15.0,2350000.0],[16.0,2350000.0],[17.0,2350000.0],[18.0,2350000.0],[19.0,2350000.0],[20.0,2350000.0],[21.0,2350000.0],[22.0,2350000.0],[23.0,2350000.0],[24.0,2350000.0],[25.0,2350000.0]]"^^jsonschema:Json ;
-    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
-
 wind_turbine:Turbine2:RatedPower a dici_reformers:RatedPower ;
-    qudt:value "3.0"^^xsd:decimal ;
+    qudt:value "2.3"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
 wind_turbine:Turbine2:RotorDiameter a dici_reformers:RotorDiameter ;
     qudt:value "82.0"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
+#
+# Turbine 3: Alkmaar 3 (3.45 MW)
+#
 wind_turbine:Turbine3 a dici_reformers:WindTurbine ;
-    rdfs:label "Turbine3" ;
+    rdfs:label "Alkmaar 3" ;
+    dici_reformers:hasWindTurbineAltitudeAttribute wind_turbine:Turbine3:Altitude ;
+    dici_reformers:hasWindTurbineLatitudeAttribute wind_turbine:Turbine3:Latitude ;
+    dici_reformers:hasWindTurbineLongitudeAttribute wind_turbine:Turbine3:Longitude ;
     dici_reformers:hasWindTurbineHubHeightAttribute wind_turbine:Turbine3:HubHeight ;
-    dici_reformers:hasWindTurbinePowerCurveAttribute wind_turbine:Turbine3:PowerCurve ;
-    dici_reformers:hasWindTurbineRatedPowerAttribute wind_turbine:Turbine3:RatedPower ;
+    dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine3:RatedPower ;
     dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine3:RotorDiameter ;
+    dici_reformers:hasWindTurbineWindTurbineTypeAttribute wind_turbine:Type:Vestas_v136_3p45MW ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine3:Altitude a dici_reformers:Altitude ;
+    qudt:value "10.0"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine3:Latitude a dici_reformers:Latitude ;
+    qudt:value "52.602287"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine3:Longitude a dici_reformers:Longitude ;
+    qudt:value "4.757099"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
 wind_turbine:Turbine3:HubHeight a dici_reformers:HubHeight ;
-    qudt:value "98.0"^^xsd:decimal ;
-    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
-
-wind_turbine:Turbine3:PowerCurve a dici_reformers:PowerCurve ;
-    dct:conformsTo dici_reformers:CurveDataSchema ;
-    qudt:value "[[1.0,0.0],[1.5,2.0],[2.0,4.0],[2.5,6.0],[3.0,8.0],[3.5,23.0],[4.0,48.0],[4.5,69.0],[5.0,104.0],[5.5,142.0],[6.0,200.0],[6.5,260.0],[7.0,340.0],[7.5,416.0],[8.0,515.0],[8.5,619.0],[9.0,748.0],[9.5,875.0],[10.0,1025.0],[10.5,1177.0],[11.0,1348.0],[11.5,1545.0],[12.0,1700.0],[12.5,1802.0],[13.0,1853.0],[13.5,1946.0],[14.0,2000.0],[14.5,2000.0],[15.0,2000.0],[15.5,2000.0],[16.0,2000.0],[16.5,2000.0],[17.0,2000.0],[17.5,2000.0],[18.0,2000.0],[18.5,2000.0],[19.0,2000.0],[19.5,2000.0],[20.0,2000.0],[20.5,2000.0],[21.0,2000.0],[21.5,2000.0],[22.0,2000.0],[22.5,2000.0],[23.0,2000.0],[23.5,2000.0],[24.0,2000.0],[24.5,2000.0],[25.0,2000.0]]"^^jsonschema:Json ;
-    dici_core:hasUnit [ dici_core:xUnit qudt-unit:M-PER-SEC ; dici_core:yUnit qudt-unit:KiloW ] ;
+    qudt:value "85.0"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
 wind_turbine:Turbine3:RatedPower a dici_reformers:RatedPower ;
-    qudt:value "1.5"^^xsd:decimal ;
+    qudt:value "3.45"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
 wind_turbine:Turbine3:RotorDiameter a dici_reformers:RotorDiameter ;
+    qudt:value "82.0"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+#
+# Turbine 4: Alkmaar 4 (1.8 MW)
+#
+wind_turbine:Turbine4 a dici_reformers:WindTurbine ;
+    rdfs:label "Alkmaar 4" ;
+    dici_reformers:hasWindTurbineAltitudeAttribute wind_turbine:Turbine4:Altitude ;
+    dici_reformers:hasWindTurbineLatitudeAttribute wind_turbine:Turbine4:Latitude ;
+    dici_reformers:hasWindTurbineLongitudeAttribute wind_turbine:Turbine4:Longitude ;
+    dici_reformers:hasWindTurbineHubHeightAttribute wind_turbine:Turbine4:HubHeight ;
+    dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine4:RatedPower ;
+    dici_reformers:hasWindTurbineRotorDiameterAttribute wind_turbine:Turbine4:RotorDiameter ;
+    dici_reformers:hasWindTurbineWindTurbineTypeAttribute wind_turbine:Type:Enercon66_1p8MW ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine4:Altitude a dici_reformers:Altitude ;
+    qudt:value "24.0"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine4:Latitude a dici_reformers:Latitude ;
+    qudt:value "52.605192"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine4:Longitude a dici_reformers:Longitude ;
+    qudt:value "4.758576"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine4:HubHeight a dici_reformers:HubHeight ;
+    qudt:value "98.0"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine4:RatedPower a dici_reformers:RatedPower ;
+    qudt:value "1.8"^^xsd:decimal ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Turbine4:RotorDiameter a dici_reformers:RotorDiameter ;
     qudt:value "70.0"^^xsd:decimal ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
-wind_forecasting:RelationshipLink0 a dici_core:ComponentLink ;
-    dici_core:hasInputEntity windpark_alkmaar:WindparkAlkmaar ;
-    dici_core:linksInputyEntityTo wind_turbine:Turbine0 ;
+#
+# WindTurbineType: Alkmaar_2p3MW
+#
+wind_turbine:Type:Alkmaar_2p3MW a dici_reformers:WindTurbineType ;
+    rdfs:label "Alkmaar_2p3MW" ;
+    dici_reformers:hasWindTurbinePowerCurveAttribute wind_turbine:Type:Alkmaar_2p3MW:PowerCurve ;
+    dici_reformers:hasWindTurbineThrustCurveAttribute wind_turbine:Type:Alkmaar_2p3MW:ThrustCurve ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
-wind_forecasting:RelationshipLink1 a dici_core:ComponentLink ;
+wind_turbine:Type:Alkmaar_2p3MW:PowerCurve a dici_reformers:PowerCurve ;
+    dct:conformsTo dici_reformers:CurveDataSchema ;
+    qudt:value "[[1.0,0.0],[2.0,3000.0],[3.0,25000.0],[4.0,82000.0],[5.0,174000.0],[6.0,321000.0],[7.0,532000.0],[8.0,815000.0],[9.0,1180000.0],[10.0,1580000.0],[11.0,1890000.0],[12.0,2100000.0],[13.0,2250000.0],[14.0,2350000.0],[15.0,2350000.0],[16.0,2350000.0],[17.0,2350000.0],[18.0,2350000.0],[19.0,2350000.0],[20.0,2350000.0],[21.0,2350000.0],[22.0,2350000.0],[23.0,2350000.0],[24.0,2350000.0],[25.0,2350000.0]]"^^jsonschema:Json ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Type:Alkmaar_2p3MW:ThrustCurve a dici_reformers:ThrustCurve ;
+    dct:conformsTo dici_reformers:CurveDataSchema ;
+    qudt:value "[[1.0,0.0],[2.0,0.780],[3.0,0.780],[4.0,0.770],[5.0,0.780],[6.0,0.780],[7.0,0.780],[8.0,0.770],[9.0,0.770],[10.0,0.770],[11.0,0.770],[12.0,0.610],[13.0,0.430],[14.0,0.330],[15.0,0.270],[16.0,0.220],[17.0,0.180],[18.0,0.150],[19.0,0.130],[20.0,0.110],[21.0,0.100],[22.0,0.080],[23.0,0.070],[24.0,0.070],[25.0,0.060]]"^^jsonschema:Json ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+#
+# WindTurbineType: Vestas_v136_3p45MW
+#
+wind_turbine:Type:Vestas_v136_3p45MW a dici_reformers:WindTurbineType ;
+    rdfs:label "Vestas_v136_3p45MW" ;
+    dici_reformers:hasWindTurbinePowerCurveAttribute wind_turbine:Type:Vestas_v136_3p45MW:PowerCurve ;
+    dici_reformers:hasWindTurbineThrustCurveAttribute wind_turbine:Type:Vestas_v136_3p45MW:ThrustCurve ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Type:Vestas_v136_3p45MW:PowerCurve a dici_reformers:PowerCurve ;
+    dct:conformsTo dici_reformers:CurveDataSchema ;
+    qudt:value "[[1.0,0.0],[1.5,0.0],[2.0,0.0],[2.5,0.0],[3.0,49.0],[3.5,127.0],[4.0,224000.0],[4.5,339000.0],[5.0,480000.0],[5.5,651000.0],[6.0,857000.0],[6.5,1099000.0],[7.0,1382000.0],[7.5,1705000.0],[8.0,2067000.0],[8.5,2460000.0],[9.0,2849000.0],[9.5,3174000.0],[10.0,3369000.0],[10.5,3434000.0],[11.0,3449000.0],[11.5,3450000.0],[12.0,3450000.0],[12.5,3450000.0],[13.0,3450000.0],[13.5,3450000.0],[14.0,3450000.0],[14.5,3450000.0],[15.0,3450000.0],[15.5,3450000.0],[16.0,3450000.0],[16.5,3450000.0],[17.0,3450000.0],[17.5,3450000.0],[18.0,3450000.0],[18.5,3450000.0],[19.0,3450000.0],[19.5,3450000.0],[20.0,3450000.0],[20.5,3450000.0],[21.0,3450000.0],[21.5,3450000.0],[22.0,3450000.0],[22.5,3450000.0],[23.0,3450000.0],[23.5,3450000.0],[24.0,3450000.0],[24.5,3450000.0],[25.0,3450000.0]]"^^jsonschema:Json ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Type:Vestas_v136_3p45MW:ThrustCurve a dici_reformers:ThrustCurve ;
+    dct:conformsTo dici_reformers:CurveDataSchema ;
+    qudt:value "[[1.0,0.868],[1.5,0.868],[2.0,0.868],[2.5,0.868],[3.0,0.868],[3.5,0.842],[4.0,0.832],[4.5,0.843],[5.0,0.837],[5.5,0.832],[6.0,0.826],[6.5,0.819],[7.0,0.811],[7.5,0.803],[8.0,0.794],[8.5,0.775],[9.0,0.727],[9.5,0.653],[10.0,0.565],[10.5,0.476],[11.0,0.402],[11.5,0.343],[12.0,0.297],[12.5,0.260],[13.0,0.229],[13.5,0.205],[14.0,0.183],[14.5,0.164],[15.0,0.148],[15.5,0.134],[16.0,0.122],[16.5,0.112],[17.0,0.102],[17.5,0.094],[18.0,0.087],[18.5,0.081],[19.0,0.075],[19.5,0.069],[20.0,0.065],[20.5,0.061],[21.0,0.057],[21.5,0.054],[22.0,0.051],[22.5,0.048],[23.0,0.047],[23.5,0.046],[24.0,0.045],[24.5,0.044],[25.0,0.043]]"^^jsonschema:Json ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+#
+# WindTurbineType: Enercon66_1p8MW
+#
+wind_turbine:Type:Enercon66_1p8MW a dici_reformers:WindTurbineType ;
+    rdfs:label "Enercon66_1p8MW" ;
+    dici_reformers:hasWindTurbinePowerCurveAttribute wind_turbine:Type:Enercon66_1p8MW:PowerCurve ;
+    dici_reformers:hasWindTurbineThrustCurveAttribute wind_turbine:Type:Enercon66_1p8MW:ThrustCurve ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Type:Enercon66_1p8MW:PowerCurve a dici_reformers:PowerCurve ;
+    dct:conformsTo dici_reformers:CurveDataSchema ;
+    qudt:value "[[1.0,0],[1.5,0],[2.0,0],[2.5,0],[3.0,0],[3.5,18],[4.0,35],[4.5,68],[5.0,101],[5.5,148],[6.0,194],[6.5,264],[7.0,334],[7.5,417],[8.0,500],[8.5,613],[9.0,725],[9.5,859],[10.0,992],[10.5,1154],[11.0,1316],[11.5,1471],[12.0,1625],[12.5,1725],[13.0,1800],[13.5,1800],[14.0,1800],[14.5,1800],[15.0,1800],[15.5,1800],[16.0,1800],[16.5,1800],[17.0,1800],[17.5,1800],[18.0,1800],[18.5,1800],[19.0,1800],[19.5,1800],[20.0,1800],[20.5,1800],[21.0,1800],[21.5,1800],[22.0,1800],[22.5,1800],[23.0,1800],[23.5,1800],[24.0,1800],[24.5,1800],[25.0,1800]]"^^jsonschema:Json ;
+    dici_core:hasUnit [ dici_core:xUnit qudt-unit:M-PER-SEC ; dici_core:yUnit qudt-unit:KiloW ] ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_turbine:Type:Enercon66_1p8MW:ThrustCurve a dici_reformers:ThrustCurve ;
+    dct:conformsTo dici_reformers:CurveDataSchema ;
+    qudt:value "[[1.0,0.838],[1.5,0.838],[2.0,0.838],[2.5,0.838],[3.0,0.838],[3.5,0.838],[4.0,0.838],[4.5,0.819],[5.0,0.808],[5.5,0.804],[6.0,0.804],[6.5,0.807],[7.0,0.807],[7.5,0.801],[8.0,0.784],[8.5,0.755],[9.0,0.717],[9.5,0.672],[10.0,0.618],[10.5,0.552],[11.0,0.483],[11.5,0.414],[12.0,0.357],[12.5,0.310],[13.0,0.272],[13.5,0.240],[14.0,0.214],[14.5,0.191],[15.0,0.172],[15.5,0.156],[16.0,0.141],[16.5,0.129],[17.0,0.118],[17.5,0.108],[18.0,0.099],[18.5,0.091],[19.0,0.085],[19.5,0.079],[20.0,0.073],[20.5,0.068],[21.0,0.064],[21.5,0.060],[22.0,0.056],[22.5,0.052],[23.0,0.049],[23.5,0.046],[24.0,0.044],[24.5,0.041],[25.0,0.039]]"^^jsonschema:Json ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+#
+# Links
+#
+wind_forecasting:RelationshipLink0 a dici_core:ComponentLink ;
     dici_core:hasInputEntity windpark_alkmaar:WindparkAlkmaar ;
     dici_core:linksInputyEntityTo wind_turbine:Turbine1 ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
-wind_forecasting:RelationshipLink2 a dici_core:ComponentLink ;
+wind_forecasting:RelationshipLink1 a dici_core:ComponentLink ;
     dici_core:hasInputEntity windpark_alkmaar:WindparkAlkmaar ;
     dici_core:linksInputyEntityTo wind_turbine:Turbine2 ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
 
-wind_forecasting:RelationshipLink3 a dici_core:ComponentLink ;
+wind_forecasting:RelationshipLink2 a dici_core:ComponentLink ;
     dici_core:hasInputEntity windpark_alkmaar:WindparkAlkmaar ;
     dici_core:linksInputyEntityTo wind_turbine:Turbine3 ;
+    dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
+
+wind_forecasting:RelationshipLink3 a dici_core:ComponentLink ;
+    dici_core:hasInputEntity windpark_alkmaar:WindparkAlkmaar ;
+    dici_core:linksInputyEntityTo wind_turbine:Turbine4 ;
     dici_core:usedInScenario wind_forecasting:BaselineAlkmaar .
