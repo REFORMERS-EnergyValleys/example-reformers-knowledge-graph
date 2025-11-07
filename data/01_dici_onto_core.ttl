@@ -29,10 +29,8 @@ dici_core:hasQuantityKind a owl:AnnotationProperty ;
                           rdfs:range qudt:QuantityKind ;
                           rdfs:domain dici_core:Attribute .
 
-# http://www.w3.org/2001/XMLSchema#duration
 xsd:duration a rdfs:Datatype .
 
-# http://qudt.org/schema/qudt/unit
 qudt:unit a owl:ObjectProperty ;
           rdfs:subPropertyOf dici_core:hasUnit ;
           rdfs:domain dici_core:Attribute ;
@@ -504,10 +502,8 @@ dici_core:yUnit a owl:ObjectProperty ;
                 rdfs:range qudt:Unit ;
                 rdfs:label "y unit" .
 
-# http://qudt.org/schema/qudt/numericValue
 qudt:numericValue a owl:DatatypeProperty .
 
-# http://qudt.org/schema/qudt/value
 qudt:value a owl:DatatypeProperty ;
            rdfs:subPropertyOf dici_core:hasAttributeValue ;
            rdfs:domain dici_core:Attribute .
@@ -576,13 +572,10 @@ dici_core:timeSeriesType a owl:DatatypeProperty ;
                          rdfs:comment "The type of time series: 'Historic', 'Live', or 'Future'"@en ;
                          rdfs:label "time series type" .
 
-# http://qudt.org/schema/qudt/QuantityKind
 qudt:QuantityKind a owl:Class .
 
-# http://qudt.org/schema/qudt/Unit
 qudt:Unit a owl:Class .
 
-# http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON
 rdf:JSON a owl:Class .
 
 dici_core:Actor a owl:Class ;
@@ -1205,8 +1198,6 @@ dici_core:Wind a owl:Class ;
 dici_core:WindResourceAttribute a owl:Class ;
                                 rdfs:subClassOf dici_core:RenewableResourceAttribute .
 
-# https://spec.edmcouncil.org/fibo/ontology/FND/Accounting/CurrencyAmount/Currency
 fibo-currency:Currency a owl:Class .
 
-# http://qudt.org/vocab/unit/KiloW-HR
 unit:KiloW-HR a owl:NamedIndividual .
