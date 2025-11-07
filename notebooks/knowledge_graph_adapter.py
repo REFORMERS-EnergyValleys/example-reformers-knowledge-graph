@@ -15,46 +15,77 @@ class KnowledgeGraphAdapter:
 
     # Query template for selecting attributes associated to wind turbines
     SELECT_TURBINE_ATTRIBUTES = """
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX dici_core: <urn:digicities:core#>
-        PREFIX dici_reformers: <urn:digicities:reformers#>
-        SELECT ?turbine_name ?attr_name ?attr WHERE {{
-            ?turbine a dici_reformers:WindTurbine ;
-                rdfs:label ?turbine_name .
-            ?turbine dici_reformers:hasWindTurbineAttribute ?attr .
-            ?attr a ?attr_type .
-            ?attr_type rdfs:subClassOf dici_reformers:WindTurbineAttribute ;
-                rdfs:label ?attr_name .
-            ?turbine dici_core:usedInScenario ?scenario .
-            ?scenario a dici_core:Scenario ;
-                rdfs:label "{scenario_name}" .
-        }}
-        """
+    PREFIX wind_turbine: <urn:reformers:wind_forecasting:wind_turbine:>
+    PREFIX windpark_alkmaar: <urn:reformers:wind_forecasting:windpark_alkmaar:>
+    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+    PREFIX dici_core: <urn:digicities:core#>
+    PREFIX dici_reformers: <urn:digicities:reformers#>
+    SELECT ?turbine_name ?attr_name ?attr WHERE {{
+        ?scenario a dici_core:Scenario ;
+            rdfs:label "{scenario}" .
+        ?windpark a dici_reformers:GlobalWindAtlasSite ;
+            rdfs:label "{global_wind_atlas_site}" .
+        ?turbine a dici_reformers:WindTurbine ;
+            rdfs:label ?turbine_name .
+        ?turbine dici_reformers:hasWindTurbineAttribute ?attr .
+        ?attr a ?attr_type .
+        ?attr_type rdfs:subClassOf dici_reformers:WindTurbineAttribute ;
+            rdfs:label ?attr_name .
+        ?turbine dici_core:usedInScenario ?scenario .
+        ?link a dici_core:ComponentLink ;
+            dici_core:hasInputEntity ?windpark ;
+            dici_core:linksInputyEntityTo ?turbine ;
+            dici_core:usedInScenario ?scenario .
+    }}
+    """
 
     # Query template for retrieving attribute values
     SELECT_ATTRIBUTE_VALUE = """
         PREFIX qudt: <http://qudt.org/schema/qudt/>
-        SELECT ?value where {{
+        SELECT ?value WHERE {{
             <{urn}> qudt:value ?value .
+        }}
+        """
+
+    # Query template for retrieving attribute unit
+    SELECT_ATTRIBUTE_UNIT = """
+        PREFIX dici_core: <urn:digicities:core#>
+        SELECT ?unit WHERE {{
+            {{
+                <{urn}> (dici_core:hasUnit | dici_core:hasUnit/dici_core:xUnit | dici_core:hasUnit/dici_core:yUnit) ?unit .
+            }} UNION {{
+                FILTER NOT EXISTS {{ <{urn}> dici_core:hasUnit ?any }}
+                <{urn}> a ?type .
+                ?type (dici_core:hasDefaultUnit | dici_core:hasDefaultUnit/dici_core:xUnit | dici_core:hasDefaultUnit/dici_core:yUnit) ?unit .
+            }}
         }}
         """
 
     def retrieve_turbine_info(
             self,
-            scenario_name: str
+            scenario: str,
+            global_wind_atlas_site: str
         ) -> dict:
         """
         Retrieve all information related to the wind turbines of a specific scenario
         """
         # Retrieve list of attributes
-        query_turbine_attributes = self.SELECT_TURBINE_ATTRIBUTES.format(scenario_name=scenario_name)
+        query_turbine_attributes = self.SELECT_TURBINE_ATTRIBUTES.format(
+            scenario=scenario, global_wind_atlas_site=global_wind_atlas_site
+            )
         turbine_attributes = self._retrieve_from_db(query_turbine_attributes)
 
         # Retrieve attribute values and convert list to nested dict
         out = defaultdict(dict)
         for turbine, name, urn in turbine_attributes:
             query_attribute_value = self.SELECT_ATTRIBUTE_VALUE.format(urn=urn)
-            out[turbine][name] = self._retrieve_from_db(query_attribute_value)[0][0]
+            value = self._retrieve_from_db(query_attribute_value)
+            query_attribute_unit = self.SELECT_ATTRIBUTE_UNIT.format(urn=urn)
+            unit = self._retrieve_from_db(query_attribute_unit)
+            if 1 == len(unit):
+                out[turbine][name] = dict(value=value[0][0], unit=unit[0][0])
+            else:
+                out[turbine][name] = dict(value=value[0][0], unit=[u[0] for u in unit if not u[0][0] == '_'])
         return dict(out)
 
     def _retrieve_from_db(self, query: str) -> list[tuple]:
@@ -80,4 +111,9 @@ class KnowledgeGraphAdapter:
             case 'https://www.w3.org/2019/wot/json-schema#Json':
                 return json.loads(entry[var]['value'])
             case _:
-                return entry[var]['value']
+                type = data.get('type')
+                match type:
+                    case 'bnode':
+                        return '_:' + entry[var]['value']
+                    case _:
+                        return entry[var]['value']
