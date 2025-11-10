@@ -92,7 +92,8 @@ dici_reformers:ThrustCurve a owl:Class ;
 dici_reformers:Altitude a owl:Class ;
     rdfs:label "Altitude" ;
     rdfs:subClassOf dici_core:GeospatialAttribute,
-        dici_core:StaticAttribute ;
+        dici_core:StaticAttribute,
+        dici_reformers:WindTurbineAttribute ;
     dici_core:hasDefaultUnit unit:M .
 
 dici_reformers:Latitude a owl:Class ;
