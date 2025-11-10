@@ -12,10 +12,10 @@ class KnowledgeGraphAdapter:
     PREFIX dici_reformers: <urn:digicities:reformers#>
     SELECT ?windpark_name ?attr_name ?attr WHERE {{
         ?scenario a dici_core:Scenario ;
-            rdfs:label "{scenario}" ;
-            rdfs:label ?windpark_name .
+            rdfs:label "{scenario}" .
         ?windpark a dici_reformers:GlobalWindAtlasSite ;
-            rdfs:label "{global_wind_atlas_site}" .
+            rdfs:label "{global_wind_atlas_site}" ;
+            rdfs:label ?windpark_name .
         ?windpark dici_reformers:hasGlobalWindAtlasSiteAttribute ?attr .
         ?attr a ?attr_type .
         ?attr_type rdfs:subClassOf dici_reformers:GlobalWindAtlasSiteAttribute ;
