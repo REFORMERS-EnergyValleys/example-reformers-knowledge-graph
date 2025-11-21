@@ -5,6 +5,13 @@
 This example shows how to set up and use a graph database, providing a knowlege graph for the REFORMERS Digital Twin.
 A [Jupyter notebook](https://docs.jupyter.org/en/latest/#what-is-a-notebook) shows how to retrieve data from the graph database.
 
+The ontology used for the knowledge graph is available in folder [`data`](./data/):
+
++ [`01_dici_onto_core.ttl`](./data/01_dici_onto_core.ttl): contains the core ontology
++ [`02_dici_onto_reformers.ttl`](./data/02_dici_onto_reformers.ttl): contains the REFORMERS-specific ontology extension for this example
++ [`03_reformers_wind_forecasting.ttl`](./data/03_reformers_wind_forecasting.ttl): contains the data (wind turbine locations, power curves, etc.) for the example
+
+
 ## Requirements
 
 The following software needs to be installed to run the prototype:
