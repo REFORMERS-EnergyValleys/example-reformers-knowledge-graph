@@ -2,7 +2,7 @@
 
 ## About
 
-This example shows how to set up and use a graph database, providing a knowlege graph for the REFORMERS Digital Twin.
+This example shows how to set up and use a graph database, providing a knowledge graph for the REFORMERS Digital Twin.
 A [Jupyter notebook](https://docs.jupyter.org/en/latest/#what-is-a-notebook) shows how to retrieve data from the graph database.
 
 The ontology used for the knowledge graph is available in folder [`data`](./data/):
